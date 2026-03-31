@@ -3,11 +3,44 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ResuMateAI Playbook</title>
+    <title>VibeCoders-PlayBook | GitHub Pages Guide for Humans and LLMs</title>
     <meta
       name="description"
-      content="A GitHub Pages guide for humans and LLMs that explains how to use the ResuMateAI agent playbook."
+      content="VibeCoders-PlayBook is a lightweight multi-agent workflow repo with GitHub Pages docs for humans and LLMs, clear ownership rules, install guides, and machine-readable onboarding."
     />
+    <meta
+      name="keywords"
+      content="VibeCoders-PlayBook, GitHub Pages, LLM docs, AI onboarding, agent workflow, prompt engineering, multi-agent repo, Codex playbook, developer docs"
+    />
+    <meta name="author" content="VibeCoders-PlayBook" />
+    <meta name="application-name" content="VibeCoders-PlayBook" />
+    <meta name="theme-color" content="#d65a31" />
+    <meta name="color-scheme" content="light" />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="generator" content="VibeCoders-PlayBook static docs" />
+    <meta name="llm-purpose" content="Teach humans and AI agents how to use this repository efficiently." />
+    <meta name="llm-entry" content="./llms.txt" />
+    <meta name="llm-full-entry" content="./llms-full.txt" />
+    <meta name="llm-load-order" content="AGENTS.md, agent_docs/active_context.md, only specific needed agent_docs/*.md files" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="VibeCoders-PlayBook" />
+    <meta
+      property="og:description"
+      content="A GitHub Pages-ready playbook that helps humans and LLMs use a lightweight multi-agent workflow with clear ownership and verification."
+    />
+    <meta property="og:site_name" content="VibeCoders-PlayBook" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="VibeCoders-PlayBook" />
+    <meta
+      name="twitter:description"
+      content="Human-friendly docs plus machine-readable onboarding for LLMs using a multi-agent repo workflow."
+    />
+    <link rel="canonical" href="./" />
+    <link rel="alternate" type="text/plain" title="LLMs instructions" href="./llms.txt" />
+    <link rel="alternate" type="text/plain" title="LLMs full instructions" href="./llms-full.txt" />
+    <link rel="manifest" href="./site.webmanifest" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -15,37 +48,84 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./styles.css" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "VibeCoders-PlayBook",
+        "description": "Static docs and machine-readable onboarding for a lightweight multi-agent repo workflow.",
+        "inLanguage": "en",
+        "about": [
+          "AI agent workflow",
+          "LLM onboarding",
+          "GitHub Pages docs",
+          "developer collaboration"
+        ],
+        "mainEntity": {
+          "@type": "SoftwareSourceCode",
+          "name": "VibeCoders-PlayBook",
+          "codeRepository": "https://github.com/YoussefSelk/VibeCode-PlayBook",
+          "programmingLanguage": [
+            "Markdown",
+            "HTML",
+            "CSS",
+            "JavaScript",
+            "PowerShell",
+            "Shell"
+          ]
+        }
+      }
+    </script>
     <script defer src="./app.js"></script>
   </head>
   <body>
     <div class="site-shell">
       <header class="hero" id="top">
         <nav class="topbar">
-          <a class="brand" href="#top">ResuMateAI</a>
+          <a class="brand" href="#top">VibeCoders-PlayBook</a>
           <div class="nav-links">
             <a href="#humans">For Humans</a>
             <a href="#llms">For LLMs</a>
             <a href="#install">Install</a>
             <a href="#map">Repo Map</a>
+            <a href="#faq">FAQ</a>
           </div>
         </nav>
 
         <div class="hero-grid">
-          <div class="hero-copy">
-            <p class="eyebrow">GitHub Pages guide for this repo</p>
-            <h1>Teach the repo once. Let humans and LLMs onboard fast.</h1>
+          <div class="hero-copy reveal">
+            <p class="eyebrow">Static docs for people, bots, and agentic tooling</p>
+            <h1>VibeCoders-PlayBook teaches the repo once, then keeps everyone aligned.</h1>
             <p class="lede">
-              This playbook gives teams a lightweight multi-agent workflow with
-              durable context, clear ownership, and a real verify-before-done
-              habit.
+              A lightweight multi-agent workflow layer for real projects, with
+              clear ownership, durable context, runtime verification, and direct
+              onboarding paths for LLMs.
             </p>
             <div class="hero-actions">
               <a class="button button-primary" href="#humans">Start Here</a>
               <a class="button button-secondary" href="./llms.txt">Open llms.txt</a>
+              <button class="button button-secondary" type="button" data-copy="prompt">
+                Copy Starter Prompt
+              </button>
+            </div>
+
+            <div class="hero-stats">
+              <article class="stat-pill">
+                <strong>8</strong>
+                <span>specialist roles</span>
+              </article>
+              <article class="stat-pill">
+                <strong>3-step</strong>
+                <span>LLM load order</span>
+              </article>
+              <article class="stat-pill">
+                <strong>0 build</strong>
+                <span>for the docs site</span>
+              </article>
             </div>
           </div>
 
-          <aside class="hero-panel">
+          <aside class="hero-panel reveal">
             <p class="panel-title">Core idea</p>
             <ul class="signal-list">
               <li>Keep context short and durable</li>
@@ -53,19 +133,26 @@
               <li>Verify the real runtime flow</li>
               <li>Finish with a reviewer pass</li>
             </ul>
+            <div class="mini-console">
+              <p class="mini-console-title">Recommended flow</p>
+              <code>prompt-engineer -&gt; owner -&gt; tester -&gt; reviewer</code>
+            </div>
             <p class="panel-footnote">
               Best for teams using Codex-style agents without wanting a heavy
-              framework.
+              framework or repeated repo summaries.
             </p>
           </aside>
         </div>
       </header>
 
       <main>
-        <section class="section section-intro" id="humans">
+        <section class="section section-intro reveal" id="humans">
           <div class="section-heading">
             <p class="eyebrow">For Humans</p>
             <h2>How to use this repo in five moves</h2>
+            <p class="section-lede">
+              If you are new to the playbook, this is the quickest reliable path.
+            </p>
           </div>
 
           <div class="card-grid">
@@ -118,10 +205,44 @@
           </div>
         </section>
 
-        <section class="section section-split" id="llms">
+        <section class="section section-showcase reveal" id="why">
+          <div class="section-heading">
+            <p class="eyebrow">Why It Works</p>
+            <h2>Small docs, clear routing, real verification</h2>
+          </div>
+
+          <div class="showcase-grid">
+            <article class="showcase-card">
+              <h3>Token-efficient by default</h3>
+              <p>
+                The playbook teaches agents to load only the context needed for
+                the current pass instead of dumping the whole repo into every task.
+              </p>
+            </article>
+            <article class="showcase-card">
+              <h3>Good for humans too</h3>
+              <p>
+                The same structure that reduces token waste also makes onboarding
+                calmer and easier for new contributors.
+              </p>
+            </article>
+            <article class="showcase-card">
+              <h3>Built for real repos</h3>
+              <p>
+                Install it into an existing project and keep your current stack.
+                The playbook should adapt to the repo, not the other way around.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section class="section section-split reveal" id="llms">
           <div class="section-heading">
             <p class="eyebrow">For LLMs</p>
             <h2>The shortest reliable mental model</h2>
+            <p class="section-lede">
+              These are the stable rules an AI agent should learn first.
+            </p>
           </div>
 
           <div class="split-layout">
@@ -147,36 +268,126 @@
             </article>
           </div>
 
-          <div class="prompt-panel">
-            <div>
-              <p class="eyebrow">Copy-paste prompt</p>
-              <h3>Good first instruction</h3>
-            </div>
-            <pre><code>Have prompt-engineer turn this into a clear execution prompt:
+          <div class="llm-grid">
+            <article class="prompt-panel">
+              <div class="panel-row">
+                <div>
+                  <p class="eyebrow">Copy-paste prompt</p>
+                  <h3>Good first instruction</h3>
+                </div>
+                <button type="button" class="copy-link" data-copy="prompt">Copy</button>
+              </div>
+              <pre><code id="prompt-block">Have prompt-engineer turn this into a clear execution prompt:
 "[rough task here]"</code></pre>
+            </article>
+
+            <article class="machine-panel">
+              <div class="panel-row">
+                <div>
+                  <p class="eyebrow">Machine-readable entry</p>
+                  <h3>Files for AI consumers</h3>
+                </div>
+              </div>
+              <ul class="machine-list">
+                <li><a href="./llms.txt">llms.txt</a> for compact onboarding</li>
+                <li><a href="./llms-full.txt">llms-full.txt</a> for expanded workflow guidance</li>
+                <li>custom LLM meta tags in the page head</li>
+                <li>JSON-LD describing the site as documentation and source code</li>
+              </ul>
+            </article>
           </div>
         </section>
 
-        <section class="section section-install" id="install">
+        <section class="section section-roles reveal">
+          <div class="section-heading">
+            <p class="eyebrow">Roles</p>
+            <h2>Filter the specialist agents</h2>
+            <p class="section-lede">
+              Click a filter to focus on a category of work.
+            </p>
+          </div>
+
+          <div class="filter-row" role="toolbar" aria-label="Role filters">
+            <button class="filter-chip is-active" type="button" data-filter="all">All</button>
+            <button class="filter-chip" type="button" data-filter="implementation">Implementation</button>
+            <button class="filter-chip" type="button" data-filter="validation">Validation</button>
+            <button class="filter-chip" type="button" data-filter="risk">Risk</button>
+          </div>
+
+          <div class="roles-grid">
+            <article class="role-chip" data-role-group="implementation">
+              <strong>prompt-engineer</strong>
+              <span>Turns rough asks into execution prompts.</span>
+            </article>
+            <article class="role-chip" data-role-group="implementation">
+              <strong>db</strong>
+              <span>Owns schema, migrations, queries, and persistence contracts.</span>
+            </article>
+            <article class="role-chip" data-role-group="implementation">
+              <strong>backend</strong>
+              <span>Owns APIs, business logic, validation, auth, and integrations.</span>
+            </article>
+            <article class="role-chip" data-role-group="implementation">
+              <strong>frontend</strong>
+              <span>Owns UI, accessibility, client behavior, and API wiring.</span>
+            </article>
+            <article class="role-chip" data-role-group="validation">
+              <strong>tester</strong>
+              <span>Verifies the real runtime flow across layers.</span>
+            </article>
+            <article class="role-chip" data-role-group="risk">
+              <strong>security</strong>
+              <span>Reviews auth, secrets, permissions, trust boundaries, and data exposure.</span>
+            </article>
+            <article class="role-chip" data-role-group="risk">
+              <strong>legal</strong>
+              <span>Reviews privacy, retention, disclosures, claims, and policy-sensitive flows.</span>
+            </article>
+            <article class="role-chip" data-role-group="validation risk">
+              <strong>reviewer</strong>
+              <span>Performs final regression and risk review.</span>
+            </article>
+          </div>
+        </section>
+
+        <section class="section section-install reveal" id="install">
           <div class="section-heading">
             <p class="eyebrow">Install</p>
             <h2>Use the repo from PowerShell or Bash</h2>
+            <p class="section-lede">
+              Toggle the command view and copy the exact installer you want.
+            </p>
           </div>
 
-          <div class="install-grid">
-            <article class="code-card">
-              <h3>PowerShell</h3>
-              <pre><code>iex "&amp; { $(irm https://raw.githubusercontent.com/YoussefSelk/VibeCode-PlayBook/main/scripts/install.ps1) }"</code></pre>
+          <div class="tab-bar" role="tablist" aria-label="Install commands">
+            <button class="tab-button is-active" type="button" role="tab" aria-selected="true" data-tab="powershell">
+              PowerShell
+            </button>
+            <button class="tab-button" type="button" role="tab" aria-selected="false" data-tab="bash">
+              Bash
+            </button>
+          </div>
+
+          <div class="install-stack">
+            <article class="code-card install-panel is-active" data-panel="powershell">
+              <div class="panel-row">
+                <h3>PowerShell installer</h3>
+                <button type="button" class="copy-link" data-copy="powershell">Copy</button>
+              </div>
+              <pre><code id="powershell-block">iex "&amp; { $(irm https://raw.githubusercontent.com/YoussefSelk/VibeCode-PlayBook/main/scripts/install.ps1) }"</code></pre>
             </article>
 
-            <article class="code-card">
-              <h3>Bash</h3>
-              <pre><code>curl -fsSL https://raw.githubusercontent.com/YoussefSelk/VibeCode-PlayBook/main/scripts/install.sh | bash</code></pre>
+            <article class="code-card install-panel" data-panel="bash">
+              <div class="panel-row">
+                <h3>Bash installer</h3>
+                <button type="button" class="copy-link" data-copy="bash">Copy</button>
+              </div>
+              <pre><code id="bash-block">curl -fsSL https://raw.githubusercontent.com/YoussefSelk/VibeCode-PlayBook/main/scripts/install.sh | bash</code></pre>
             </article>
           </div>
         </section>
 
-        <section class="section" id="map">
+        <section class="section reveal" id="map">
           <div class="section-heading">
             <p class="eyebrow">Repo Map</p>
             <h2>What lives where</h2>
@@ -200,40 +411,70 @@
 
             <article class="map-card">
               <h3><code>docs/</code></h3>
-              <p>This site and the machine-readable onboarding files for LLMs.</p>
+              <p>This site, SEO metadata, structured data, and machine-readable onboarding files for LLMs.</p>
             </article>
           </div>
         </section>
 
-        <section class="section section-roles">
+        <section class="section section-checklist reveal">
           <div class="section-heading">
-            <p class="eyebrow">Roles</p>
-            <h2>Who does what</h2>
+            <p class="eyebrow">Quick Audit</p>
+            <h2>Use this before calling a change done</h2>
           </div>
 
-          <div class="roles-grid">
-            <article class="role-chip"><strong>prompt-engineer</strong><span>Turns rough asks into execution prompts.</span></article>
-            <article class="role-chip"><strong>db</strong><span>Owns schema, migrations, queries, and persistence contracts.</span></article>
-            <article class="role-chip"><strong>backend</strong><span>Owns APIs, business logic, validation, auth, and integrations.</span></article>
-            <article class="role-chip"><strong>frontend</strong><span>Owns UI, accessibility, client behavior, and API wiring.</span></article>
-            <article class="role-chip"><strong>tester</strong><span>Verifies the real runtime flow across layers.</span></article>
-            <article class="role-chip"><strong>security</strong><span>Reviews auth, secrets, permissions, trust boundaries, and data exposure.</span></article>
-            <article class="role-chip"><strong>legal</strong><span>Reviews privacy, retention, disclosures, claims, and policy-sensitive flows.</span></article>
-            <article class="role-chip"><strong>reviewer</strong><span>Performs final regression and risk review.</span></article>
+          <div class="checklist-card">
+            <label class="check-row"><input type="checkbox" /> The owning layer was handled by the right agent.</label>
+            <label class="check-row"><input type="checkbox" /> Durable docs were updated only where needed.</label>
+            <label class="check-row"><input type="checkbox" /> Runtime behavior was verified when relevant.</label>
+            <label class="check-row"><input type="checkbox" /> Security or legal review was added if the risk boundary changed.</label>
+            <label class="check-row"><input type="checkbox" /> Reviewer-level risks are acceptable.</label>
           </div>
         </section>
 
-        <section class="section section-footer-note">
+        <section class="section section-faq reveal" id="faq">
+          <div class="section-heading">
+            <p class="eyebrow">FAQ</p>
+            <h2>Common onboarding questions</h2>
+          </div>
+
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Is this a full app framework?</summary>
+              <p>
+                No. It is a workflow layer you install into an existing repo so
+                your agents and contributors follow a clearer operating model.
+              </p>
+            </details>
+            <details class="faq-item">
+              <summary>Why does it have both human docs and LLM docs?</summary>
+              <p>
+                Because this repo is meant to coordinate both. Humans need a clear
+                mental model, and LLMs benefit from compact, explicit entry points.
+              </p>
+            </details>
+            <details class="faq-item">
+              <summary>Why keep the site static?</summary>
+              <p>
+                Static files are easier to host on GitHub Pages, easier to inspect,
+                and simpler for AI agents and developers to parse and maintain.
+              </p>
+            </details>
+          </div>
+        </section>
+
+        <section class="section section-footer-note reveal">
           <div class="footer-panel">
             <p class="eyebrow">GitHub Pages</p>
             <h2>This site is static by design</h2>
             <p>
               No framework, no build step, no lockfile. That keeps it easy to
-              host on GitHub Pages and easy for both people and agents to read.
+              host on GitHub Pages, crawl by search engines, and consume by LLMs.
             </p>
           </div>
         </section>
       </main>
+
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
     </div>
   </body>
 </html>

@@ -1,0 +1,9 @@
+{
+  "name": "VibeCoders-PlayBook",
+  "short_name": "VibeCoders",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f6f1e8",
+  "theme_color": "#d65a31",
+  "description": "Static docs and machine-readable onboarding for the VibeCoders-PlayBook multi-agent workflow."
+}

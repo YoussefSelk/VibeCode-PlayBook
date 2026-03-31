@@ -1,4 +1,4 @@
-# ResuMateAI / VibeCoders-PlayBook Full Guide For LLMs
+# VibeCoders-PlayBook Full Guide For LLMs
 
 This repository provides a lightweight multi-agent operating layer that can be installed into another project.
 
@@ -51,6 +51,8 @@ Important repo files:
 - agent_docs/tech_stack.md
 - agent_docs/verification.md
 - agent_docs/decisions.md
+- docs/index.html
+- docs/llms.txt
 
 Install entry points:
 - scripts/install.ps1

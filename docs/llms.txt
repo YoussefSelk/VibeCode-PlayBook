@@ -1,6 +1,14 @@
-# ResuMateAI / VibeCoders-PlayBook
+# VibeCoders-PlayBook
 
 Purpose: lightweight multi-agent repo workflow for humans and LLMs.
+
+Primary audience:
+- developers onboarding to the repo
+- agentic coding assistants
+- LLM systems that need a compact, explicit operating model
+
+Canonical docs entry:
+- docs/index.html
 
 Primary files:
 - AGENTS.md: operating rules, ownership, load order, and definition of done
@@ -55,3 +63,4 @@ Guidance:
 - do not bulk-load every document
 - do not restate the whole repo in every prompt
 - verify runtime behavior before calling work done
+- prefer this file first when a machine-readable summary is needed
