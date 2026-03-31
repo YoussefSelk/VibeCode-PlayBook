@@ -1,5 +1,5 @@
 
-# ResuMateAI
+# VibeCoders-PlayBook
 
 This repo is a lean Codex multi-agent layer you can drop into a real project.
 
