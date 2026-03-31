@@ -29,6 +29,12 @@ Do not bulk-load every doc.
 - `tester`
   Verifies the real runtime flow across layers.
 
+- `security`
+  Performs a paranoid security review for auth, permissions, secrets, input handling, and sensitive data exposure.
+
+- `legal`
+  Performs a legal/compliance risk review for privacy, consent, policy-sensitive flows, retention, and risky product claims.
+
 - `reviewer`
   Performs the final regression and risk review.
 
@@ -38,12 +44,22 @@ Do not bulk-load every doc.
 
 Use this unless the task is truly single-layer and low-risk.
 
+For security-sensitive work:
+
+`prompt-engineer` -> owning agent(s) -> `tester` -> `security` -> `reviewer`
+
+For legal/compliance-sensitive work:
+
+`prompt-engineer` -> owning agent(s) -> `tester` -> `legal` -> `reviewer`
+
 ## Ownership Rules
 
 - `db` for schema or persistence changes
 - `backend` for API or business-logic changes
 - `frontend` for UI or client-state changes
 - `tester` after implementation
+- `security` for auth, secrets, access control, uploads, risky integrations, or sensitive data flows
+- `legal` for privacy, consent, analytics, retention, AI disclosures, policy-sensitive copy, or regulated/sensitive flows
 - `reviewer` before calling work done
 
 If a change affects contracts between layers, verify both sides.

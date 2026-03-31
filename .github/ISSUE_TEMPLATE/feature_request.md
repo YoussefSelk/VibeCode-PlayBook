@@ -15,6 +15,8 @@ assignees: ""
 - [ ] DB
 - [ ] Backend
 - [ ] Frontend
+- [ ] Security-sensitive
+- [ ] Legal / compliance-sensitive
 - [ ] Docs / workflow
 
 ## Constraints

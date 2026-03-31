@@ -17,6 +17,8 @@ assignees: ""
 - [ ] DB
 - [ ] Backend
 - [ ] Frontend
+- [ ] Security-sensitive
+- [ ] Legal / compliance-sensitive
 - [ ] Unknown
 
 ## Reproduction notes

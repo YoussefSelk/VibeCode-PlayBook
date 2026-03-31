@@ -14,6 +14,8 @@ $files = @(
   ".codex/agents/backend.toml",
   ".codex/agents/frontend.toml",
   ".codex/agents/tester.toml",
+  ".codex/agents/security.toml",
+  ".codex/agents/legal.toml",
   ".codex/agents/reviewer.toml",
   "AGENTS.md",
   "agent_docs/README.md",

@@ -11,6 +11,8 @@ Why was this needed?
 - [ ] DB
 - [ ] Backend
 - [ ] Frontend
+- [ ] Security-sensitive area
+- [ ] Legal / compliance-sensitive area
 - [ ] Docs / workflow
 
 ## Validation
@@ -19,6 +21,8 @@ Why was this needed?
 - [ ] Implementation was done by the right layer owner(s)
 - [ ] End-to-end behavior was verified where relevant
 - [ ] Runtime behavior was checked, not just tests
+- [ ] Security review was done where relevant
+- [ ] Legal / compliance review was done where relevant
 
 ## Reviewer Focus
 

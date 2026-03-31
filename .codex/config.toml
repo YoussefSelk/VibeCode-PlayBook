@@ -20,3 +20,9 @@ nickname_candidates = ["QA Lead", "Flow Verifier"]
 
 [agents.reviewer]
 nickname_candidates = ["Code Review", "Risk Guard"]
+
+[agents.security]
+nickname_candidates = ["Security Audit", "Threat Guard"]
+
+[agents.legal]
+nickname_candidates = ["Legal Check", "Compliance Guard"]
