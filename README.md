@@ -1,5 +1,5 @@
 
-# ResuMateAI
+# VibeCode-PlayBook
 
 This repository is prepared for a Codex-first, multi-agent development workflow.
 
