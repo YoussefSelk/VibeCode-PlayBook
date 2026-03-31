@@ -1,4 +1,6 @@
 
+# ResuMateAI
+
 This repository is prepared for a Codex-first, multi-agent development workflow.
 
 ## Current Setup
@@ -21,6 +23,17 @@ Vibe coding docs:
 - `docs/VIBE_CODING_PLAYBOOK.md`
 - `docs/PROMPT_TEMPLATES.md`
 - `docs/SESSION_BRIEF_TEMPLATE.md`
+- `docs/WORKFLOWS.md`
+
+Prompt starters:
+- `prompts/full-stack-bug.md`
+- `prompts/full-feature.md`
+- `prompts/runtime-debug.md`
+
+Collaboration files:
+- `CONTRIBUTING.md`
+- `.github/PULL_REQUEST_TEMPLATE.md`
+- `.github/ISSUE_TEMPLATE/`
 
 ## Recommended Workflow
 
@@ -66,3 +79,16 @@ The setup is designed so the project behaves more like a small dev team than a s
 - clearer ownership
 - stronger end-to-end validation
 - better final review before calling work done
+
+## Repo Identity
+
+This repo is now set up as a starter workspace for vibe coders:
+- fast to start
+- structured enough to scale
+- optimized for rough ideas becoming real implementation
+- built around multi-agent collaboration instead of one-shot prompting
+
+It is intentionally stack-agnostic:
+- the agents coordinate on ownership and validation
+- they adapt to the framework and layout you actually use
+- they do not assume a specific folder structure unless the repo already does

@@ -13,6 +13,9 @@ That means:
 
 The workflow is optimized for momentum with guardrails.
 
+One important rule:
+- the team should adapt to the repository's real stack instead of forcing a preferred framework or folder layout
+
 ## Team Workflow
 
 ### 1. Shape the request

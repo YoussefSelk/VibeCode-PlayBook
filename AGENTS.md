@@ -8,7 +8,7 @@ This project uses a coordinated multi-agent system designed for production-grade
   Converts vague requests into precise, execution-ready prompts and orchestrates agent workflows.
 
 - `db`  
-  Owns schema design, migrations, data integrity, indexing, and Prisma + Supabase compatibility.
+  Owns schema design, migrations, data integrity, indexing, and persistence-layer compatibility.
 
 - `backend`  
   Owns APIs, controllers, services, validation, authentication, and business logic.
@@ -30,6 +30,7 @@ This project uses a coordinated multi-agent system designed for production-grade
 - Each layer must be correct **and** correctly connected
 - Always validate real behavior, not assumptions
 - Prefer simple, explicit, maintainable solutions
+- Adapt to the repository's actual stack instead of forcing one
 
 ---
 
@@ -61,6 +62,7 @@ Rules:
 - Do NOT mix responsibilities
 - Avoid multiple agents editing same files unless required
 - If contracts change → update both sides
+- Do not force frameworks, folder structures, or libraries the repo does not already use
 
 Parallel execution:
 
@@ -219,3 +221,4 @@ Use these project files to keep sessions consistent:
 - `docs/VIBE_CODING_PLAYBOOK.md` for the team operating model
 - `docs/PROMPT_TEMPLATES.md` for reusable prompt patterns
 - `docs/SESSION_BRIEF_TEMPLATE.md` for stronger starting context
+- `docs/WORKFLOWS.md` for execution recipes
