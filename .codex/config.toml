@@ -1,0 +1,22 @@
+[agents]
+max_threads = 6
+max_depth = 2
+job_max_runtime_seconds = 2700
+
+[agents.prompt-engineer]
+nickname_candidates = ["Prompt Lead", "Prompt Ops"]
+
+[agents.db]
+nickname_candidates = ["DB Lead", "Schema Guard"]
+
+[agents.backend]
+nickname_candidates = ["API Lead", "Service Owner"]
+
+[agents.frontend]
+nickname_candidates = ["UI Lead", "Client Owner"]
+
+[agents.tester]
+nickname_candidates = ["QA Lead", "Flow Verifier"]
+
+[agents.reviewer]
+nickname_candidates = ["Code Review", "Risk Guard"]
