@@ -1,0 +1,57 @@
+# ResuMateAI / VibeCoders-PlayBook
+
+Purpose: lightweight multi-agent repo workflow for humans and LLMs.
+
+Primary files:
+- AGENTS.md: operating rules, ownership, load order, and definition of done
+- agent_docs/active_context.md: current goal, scope, task, validation, next step
+- agent_docs/project_brief.md: durable product context
+- agent_docs/tech_stack.md: actual stack, commands, boundaries, environment
+- agent_docs/verification.md: real checks and manual validation steps
+- README.md: installation and usage guide
+
+Required load order:
+1. AGENTS.md
+2. agent_docs/active_context.md
+3. only the specific agent_docs/*.md files needed for the current task
+
+Default workflow:
+- prompt-engineer -> owning agent(s) -> tester -> reviewer
+
+Escalate to security when the change involves:
+- auth
+- secrets
+- permissions
+- uploads
+- risky integrations
+- sensitive data flows
+
+Escalate to legal when the change involves:
+- privacy
+- consent
+- retention
+- analytics or tracking
+- AI disclosures
+- policy-sensitive copy or risky claims
+
+Ownership:
+- db: schema, migrations, queries, persistence contracts
+- backend: APIs, validation, business logic, auth, backend contracts
+- frontend: UI, accessibility, client behavior, frontend integration
+- tester: runtime flow validation across layers
+- security: trust boundaries and data exposure review
+- legal: privacy and compliance risk review
+- reviewer: final regression and risk review
+
+Repo map:
+- scripts/install.ps1
+- scripts/install.sh
+- scripts/install.cmd
+- .codex/agents/*
+- agent_docs/*
+
+Guidance:
+- keep prompts compact
+- do not bulk-load every document
+- do not restate the whole repo in every prompt
+- verify runtime behavior before calling work done

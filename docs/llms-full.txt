@@ -1,0 +1,71 @@
+# ResuMateAI / VibeCoders-PlayBook Full Guide For LLMs
+
+This repository provides a lightweight multi-agent operating layer that can be installed into another project.
+
+Core purpose:
+- better agent coordination
+- less repeated context
+- fewer wasted tokens
+- stronger end-to-end validation
+
+High-confidence usage pattern:
+1. Read AGENTS.md
+2. Read agent_docs/active_context.md
+3. Read only the specific durable docs needed for the current pass
+4. If the task is vague, start with prompt-engineer
+5. Route implementation by ownership
+6. Validate with tester
+7. Use security and legal when the feature crosses their risk boundaries
+8. Finish with reviewer
+
+Default execution chain:
+- prompt-engineer -> owner -> tester -> reviewer
+
+Security-sensitive chain:
+- prompt-engineer -> owner -> tester -> security -> reviewer
+
+Legal/compliance-sensitive chain:
+- prompt-engineer -> owner -> tester -> legal -> reviewer
+
+Very sensitive chain:
+- prompt-engineer -> owner -> tester -> security -> legal -> reviewer
+
+Ownership rules:
+- db owns schema or persistence changes
+- backend owns API or business-logic changes
+- frontend owns UI or client-state changes
+- tester validates the runtime flow
+- reviewer is the final checkpoint before calling the task done
+
+Definition of done:
+- owning layer change is correct
+- runtime behavior is validated when relevant
+- contract mismatches are checked
+- reviewer-level risks are acceptable
+
+Important repo files:
+- README.md
+- AGENTS.md
+- agent_docs/active_context.md
+- agent_docs/project_brief.md
+- agent_docs/tech_stack.md
+- agent_docs/verification.md
+- agent_docs/decisions.md
+
+Install entry points:
+- scripts/install.ps1
+- scripts/install.sh
+- scripts/install.cmd
+
+Human prompt pattern:
+Have prompt-engineer turn this into a clear execution prompt:
+"[rough request here]"
+
+Key constraints for agents:
+- prefer short durable docs over long repeated prompts
+- keep active_context.md current and compact
+- record durable project facts in project_brief.md
+- record stack and commands in tech_stack.md
+- record real verification steps in verification.md
+- record important decisions in decisions.md
+- do not force frameworks or structures the target repo does not already use

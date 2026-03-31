@@ -3,6 +3,17 @@
 
 This repo is a lean Codex multi-agent layer you can drop into a real project.
 
+## Docs Site
+
+This repo now includes a GitHub Pages-ready static guide in `docs/`.
+
+- human-friendly entry page: `docs/index.html`
+- machine-readable onboarding: `docs/llms.txt`
+- expanded LLM guide: `docs/llms-full.txt`
+- deploy workflow: `.github/workflows/deploy-pages.yml`
+
+If you use GitHub Pages with GitHub Actions, pushes to `main` that change `docs/` will deploy the site automatically.
+
 Purpose:
 - better agent coordination
 - less repeated context

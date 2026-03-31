@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ResuMateAI Playbook</title>
+    <meta
+      name="description"
+      content="A GitHub Pages guide for humans and LLMs that explains how to use the ResuMateAI agent playbook."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+    <script defer src="./app.js"></script>
+  </head>
+  <body>
+    <div class="site-shell">
+      <header class="hero" id="top">
+        <nav class="topbar">
+          <a class="brand" href="#top">ResuMateAI</a>
+          <div class="nav-links">
+            <a href="#humans">For Humans</a>
+            <a href="#llms">For LLMs</a>
+            <a href="#install">Install</a>
+            <a href="#map">Repo Map</a>
+          </div>
+        </nav>
+
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow">GitHub Pages guide for this repo</p>
+            <h1>Teach the repo once. Let humans and LLMs onboard fast.</h1>
+            <p class="lede">
+              This playbook gives teams a lightweight multi-agent workflow with
+              durable context, clear ownership, and a real verify-before-done
+              habit.
+            </p>
+            <div class="hero-actions">
+              <a class="button button-primary" href="#humans">Start Here</a>
+              <a class="button button-secondary" href="./llms.txt">Open llms.txt</a>
+            </div>
+          </div>
+
+          <aside class="hero-panel">
+            <p class="panel-title">Core idea</p>
+            <ul class="signal-list">
+              <li>Keep context short and durable</li>
+              <li>Route work to the right specialist</li>
+              <li>Verify the real runtime flow</li>
+              <li>Finish with a reviewer pass</li>
+            </ul>
+            <p class="panel-footnote">
+              Best for teams using Codex-style agents without wanting a heavy
+              framework.
+            </p>
+          </aside>
+        </div>
+      </header>
+
+      <main>
+        <section class="section section-intro" id="humans">
+          <div class="section-heading">
+            <p class="eyebrow">For Humans</p>
+            <h2>How to use this repo in five moves</h2>
+          </div>
+
+          <div class="card-grid">
+            <article class="card">
+              <span class="card-step">01</span>
+              <h3>Install the playbook</h3>
+              <p>
+                Drop the repo files into a real project using the installer
+                scripts in <code>scripts/</code>.
+              </p>
+            </article>
+
+            <article class="card">
+              <span class="card-step">02</span>
+              <h3>Fill the durable docs</h3>
+              <p>
+                Start with <code>project_brief.md</code>,
+                <code>tech_stack.md</code>, <code>active_context.md</code>, and
+                <code>verification.md</code>.
+              </p>
+            </article>
+
+            <article class="card">
+              <span class="card-step">03</span>
+              <h3>Shape rough asks first</h3>
+              <p>
+                Use <code>prompt-engineer</code> before implementation when the
+                task is vague or crosses layers.
+              </p>
+            </article>
+
+            <article class="card">
+              <span class="card-step">04</span>
+              <h3>Assign by ownership</h3>
+              <p>
+                Let <code>db</code>, <code>backend</code>, or
+                <code>frontend</code> own the change, then validate it with
+                <code>tester</code>.
+              </p>
+            </article>
+
+            <article class="card">
+              <span class="card-step">05</span>
+              <h3>Close with risk review</h3>
+              <p>
+                Use <code>security</code>, <code>legal</code>, and
+                <code>reviewer</code> when the feature warrants it.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section class="section section-split" id="llms">
+          <div class="section-heading">
+            <p class="eyebrow">For LLMs</p>
+            <h2>The shortest reliable mental model</h2>
+          </div>
+
+          <div class="split-layout">
+            <article class="guide-block">
+              <h3>Load order</h3>
+              <ol class="number-list">
+                <li>Read <code>AGENTS.md</code></li>
+                <li>Read <code>agent_docs/active_context.md</code></li>
+                <li>Read only the one or two specific docs needed next</li>
+              </ol>
+            </article>
+
+            <article class="guide-block">
+              <h3>Default sequence</h3>
+              <p class="mono-line">
+                <code>prompt-engineer -&gt; owner -&gt; tester -&gt; reviewer</code>
+              </p>
+              <p>
+                Add <code>security</code> for auth, secrets, trust boundaries,
+                uploads, or sensitive data. Add <code>legal</code> for privacy,
+                consent, retention, disclosures, or risky claims.
+              </p>
+            </article>
+          </div>
+
+          <div class="prompt-panel">
+            <div>
+              <p class="eyebrow">Copy-paste prompt</p>
+              <h3>Good first instruction</h3>
+            </div>
+            <pre><code>Have prompt-engineer turn this into a clear execution prompt:
+"[rough task here]"</code></pre>
+          </div>
+        </section>
+
+        <section class="section section-install" id="install">
+          <div class="section-heading">
+            <p class="eyebrow">Install</p>
+            <h2>Use the repo from PowerShell or Bash</h2>
+          </div>
+
+          <div class="install-grid">
+            <article class="code-card">
+              <h3>PowerShell</h3>
+              <pre><code>iex "&amp; { $(irm https://raw.githubusercontent.com/YoussefSelk/VibeCode-PlayBook/main/scripts/install.ps1) }"</code></pre>
+            </article>
+
+            <article class="code-card">
+              <h3>Bash</h3>
+              <pre><code>curl -fsSL https://raw.githubusercontent.com/YoussefSelk/VibeCode-PlayBook/main/scripts/install.sh | bash</code></pre>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" id="map">
+          <div class="section-heading">
+            <p class="eyebrow">Repo Map</p>
+            <h2>What lives where</h2>
+          </div>
+
+          <div class="map-grid">
+            <article class="map-card">
+              <h3><code>AGENTS.md</code></h3>
+              <p>The operating system for the workflow and ownership rules.</p>
+            </article>
+
+            <article class="map-card">
+              <h3><code>agent_docs/</code></h3>
+              <p>Small durable context files that reduce repeated prompting.</p>
+            </article>
+
+            <article class="map-card">
+              <h3><code>scripts/</code></h3>
+              <p>Installers for dropping the playbook into real projects.</p>
+            </article>
+
+            <article class="map-card">
+              <h3><code>docs/</code></h3>
+              <p>This site and the machine-readable onboarding files for LLMs.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="section section-roles">
+          <div class="section-heading">
+            <p class="eyebrow">Roles</p>
+            <h2>Who does what</h2>
+          </div>
+
+          <div class="roles-grid">
+            <article class="role-chip"><strong>prompt-engineer</strong><span>Turns rough asks into execution prompts.</span></article>
+            <article class="role-chip"><strong>db</strong><span>Owns schema, migrations, queries, and persistence contracts.</span></article>
+            <article class="role-chip"><strong>backend</strong><span>Owns APIs, business logic, validation, auth, and integrations.</span></article>
+            <article class="role-chip"><strong>frontend</strong><span>Owns UI, accessibility, client behavior, and API wiring.</span></article>
+            <article class="role-chip"><strong>tester</strong><span>Verifies the real runtime flow across layers.</span></article>
+            <article class="role-chip"><strong>security</strong><span>Reviews auth, secrets, permissions, trust boundaries, and data exposure.</span></article>
+            <article class="role-chip"><strong>legal</strong><span>Reviews privacy, retention, disclosures, claims, and policy-sensitive flows.</span></article>
+            <article class="role-chip"><strong>reviewer</strong><span>Performs final regression and risk review.</span></article>
+          </div>
+        </section>
+
+        <section class="section section-footer-note">
+          <div class="footer-panel">
+            <p class="eyebrow">GitHub Pages</p>
+            <h2>This site is static by design</h2>
+            <p>
+              No framework, no build step, no lockfile. That keeps it easy to
+              host on GitHub Pages and easy for both people and agents to read.
+            </p>
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
