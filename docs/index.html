@@ -80,72 +80,105 @@
   </head>
   <body>
     <div class="site-shell">
-      <header class="hero" id="top">
-        <nav class="topbar">
-          <a class="brand" href="#top">VibeCoders-PlayBook</a>
-          <div class="nav-links">
-            <a href="#humans">For Humans</a>
-            <a href="#llms">For LLMs</a>
-            <a href="#install">Install</a>
-            <a href="#map">Repo Map</a>
-            <a href="#faq">FAQ</a>
-          </div>
-        </nav>
-
-        <div class="hero-grid">
-          <div class="hero-copy reveal">
-            <p class="eyebrow">Static docs for people, bots, and agentic tooling</p>
-            <h1>VibeCoders-PlayBook teaches the repo once, then keeps everyone aligned.</h1>
-            <p class="lede">
-              A lightweight multi-agent workflow layer for real projects, with
-              clear ownership, durable context, runtime verification, and direct
-              onboarding paths for LLMs.
-            </p>
-            <div class="hero-actions">
-              <a class="button button-primary" href="#humans">Start Here</a>
-              <a class="button button-secondary" href="./llms.txt">Open llms.txt</a>
-              <button class="button button-secondary" type="button" data-copy="prompt">
-                Copy Starter Prompt
-              </button>
-            </div>
-
-            <div class="hero-stats">
-              <article class="stat-pill">
-                <strong>8</strong>
-                <span>specialist roles</span>
-              </article>
-              <article class="stat-pill">
-                <strong>3-step</strong>
-                <span>LLM load order</span>
-              </article>
-              <article class="stat-pill">
-                <strong>0 build</strong>
-                <span>for the docs site</span>
-              </article>
-            </div>
-          </div>
-
-          <aside class="hero-panel reveal">
-            <p class="panel-title">Core idea</p>
-            <ul class="signal-list">
-              <li>Keep context short and durable</li>
-              <li>Route work to the right specialist</li>
-              <li>Verify the real runtime flow</li>
-              <li>Finish with a reviewer pass</li>
-            </ul>
-            <div class="mini-console">
-              <p class="mini-console-title">Recommended flow</p>
-              <code>prompt-engineer -&gt; owner -&gt; tester -&gt; reviewer</code>
-            </div>
-            <p class="panel-footnote">
-              Best for teams using Codex-style agents without wanting a heavy
-              framework or repeated repo summaries.
-            </p>
-          </aside>
+      <nav class="topbar">
+        <a class="brand" href="#top">VibeCoders-PlayBook</a>
+        <div class="nav-links">
+          <a href="#humans">For Humans</a>
+          <a href="#llms">For LLMs</a>
+          <a href="#install">Install</a>
+          <a href="#map">Repo Map</a>
+          <a href="#faq">FAQ</a>
         </div>
-      </header>
+      </nav>
 
-      <main>
+      <div class="docs-layout">
+        <aside class="docs-sidebar reveal">
+          <div class="sidebar-card">
+            <p class="eyebrow">Framework Docs</p>
+            <h2>Start here</h2>
+            <nav class="sidebar-nav">
+              <a href="#top">Overview</a>
+              <a href="#humans">Getting Started</a>
+              <a href="#why">Core Concepts</a>
+              <a href="#llms">LLM Guide</a>
+              <a href="#install">Installation</a>
+              <a href="#map">File Structure</a>
+              <a href="#faq">FAQ</a>
+            </nav>
+          </div>
+
+          <div class="sidebar-card sidebar-card-accent">
+            <p class="eyebrow">Default Flow</p>
+            <code>prompt-engineer -&gt; owner -&gt; tester -&gt; reviewer</code>
+          </div>
+
+          <div class="sidebar-card">
+            <p class="eyebrow">Machine-readable</p>
+            <ul class="sidebar-list">
+              <li><a href="./llms.txt">llms.txt</a></li>
+              <li><a href="./llms-full.txt">llms-full.txt</a></li>
+              <li><a href="./robots.txt">robots.txt</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <main class="docs-main">
+          <header class="hero reveal" id="top">
+            <div class="hero-copy">
+              <p class="eyebrow">Static docs for people, bots, and agentic tooling</p>
+              <h1>VibeCoders-PlayBook teaches the repo once, then keeps everyone aligned.</h1>
+              <p class="lede">
+                A lightweight multi-agent workflow layer for real projects, with
+                clear ownership, durable context, runtime verification, and direct
+                onboarding paths for LLMs.
+              </p>
+              <div class="hero-actions">
+                <a class="button button-primary" href="#humans">Start Here</a>
+                <a class="button button-secondary" href="./llms.txt">Open llms.txt</a>
+                <button class="button button-secondary" type="button" data-copy="prompt">
+                  Copy Starter Prompt
+                </button>
+              </div>
+
+              <div class="hero-stats">
+                <article class="stat-pill">
+                  <strong>8</strong>
+                  <span>specialist roles</span>
+                </article>
+                <article class="stat-pill">
+                  <strong>3-step</strong>
+                  <span>LLM load order</span>
+                </article>
+                <article class="stat-pill">
+                  <strong>0 build</strong>
+                  <span>for the docs site</span>
+                </article>
+              </div>
+            </div>
+
+            <aside class="hero-panel">
+              <p class="panel-title">Core idea</p>
+              <ul class="signal-list">
+                <li>Keep context short and durable</li>
+                <li>Route work to the right specialist</li>
+                <li>Verify the real runtime flow</li>
+                <li>Finish with a reviewer pass</li>
+              </ul>
+              <div class="mini-console">
+                <div class="code-window-head">
+                  <span></span><span></span><span></span>
+                  <small>workflow</small>
+                </div>
+                <pre class="mini-pre"><code>prompt-engineer -> owner
+tester -> reviewer</code></pre>
+              </div>
+              <p class="panel-footnote">
+                Best for teams using Codex-style agents without wanting a heavy
+                framework or repeated repo summaries.
+              </p>
+            </aside>
+          </header>
+
         <section class="section section-intro reveal" id="humans">
           <div class="section-heading">
             <p class="eyebrow">For Humans</p>
@@ -277,8 +310,14 @@
                 </div>
                 <button type="button" class="copy-link" data-copy="prompt">Copy</button>
               </div>
-              <pre><code id="prompt-block">Have prompt-engineer turn this into a clear execution prompt:
+              <div class="code-window">
+                <div class="code-window-head">
+                  <span></span><span></span><span></span>
+                  <small>prompt.txt</small>
+                </div>
+                <pre><code id="prompt-block">Have prompt-engineer turn this into a clear execution prompt:
 "[rough task here]"</code></pre>
+              </div>
             </article>
 
             <article class="machine-panel">
@@ -374,7 +413,13 @@
                 <h3>PowerShell installer</h3>
                 <button type="button" class="copy-link" data-copy="powershell">Copy</button>
               </div>
-              <pre><code id="powershell-block">iex "&amp; { $(irm https://raw.githubusercontent.com/YoussefSelk/VibeCode-PlayBook/main/scripts/install.ps1) }"</code></pre>
+              <div class="code-window code-window-light">
+                <div class="code-window-head">
+                  <span></span><span></span><span></span>
+                  <small>powershell</small>
+                </div>
+                <pre><code id="powershell-block">iex "&amp; { $(irm https://raw.githubusercontent.com/YoussefSelk/VibeCode-PlayBook/main/scripts/install.ps1) }"</code></pre>
+              </div>
             </article>
 
             <article class="code-card install-panel" data-panel="bash">
@@ -382,7 +427,13 @@
                 <h3>Bash installer</h3>
                 <button type="button" class="copy-link" data-copy="bash">Copy</button>
               </div>
-              <pre><code id="bash-block">curl -fsSL https://raw.githubusercontent.com/YoussefSelk/VibeCode-PlayBook/main/scripts/install.sh | bash</code></pre>
+              <div class="code-window code-window-light">
+                <div class="code-window-head">
+                  <span></span><span></span><span></span>
+                  <small>bash</small>
+                </div>
+                <pre><code id="bash-block">curl -fsSL https://raw.githubusercontent.com/YoussefSelk/VibeCode-PlayBook/main/scripts/install.sh | bash</code></pre>
+              </div>
             </article>
           </div>
         </section>
@@ -461,7 +512,8 @@
             </details>
           </div>
         </section>
-      </main>
+        </main>
+      </div>
 
       <div class="toast" id="toast" role="status" aria-live="polite"></div>
     </div>

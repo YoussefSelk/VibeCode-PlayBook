@@ -1,4 +1,5 @@
 const navLinks = document.querySelectorAll(".nav-links a");
+const sidebarLinks = document.querySelectorAll(".sidebar-nav a");
 const sections = document.querySelectorAll("main section[id]");
 const revealBlocks = document.querySelectorAll(".reveal");
 const tabButtons = document.querySelectorAll(".tab-button");
@@ -15,6 +16,29 @@ const copyMap = {
 };
 
 let toastTimer;
+
+const legacyCopy = (text) => {
+  const textarea = document.createElement("textarea");
+  textarea.value = text;
+  textarea.setAttribute("readonly", "");
+  textarea.style.position = "fixed";
+  textarea.style.opacity = "0";
+  textarea.style.pointerEvents = "none";
+  document.body.appendChild(textarea);
+  textarea.focus();
+  textarea.select();
+
+  let copied = false;
+
+  try {
+    copied = document.execCommand("copy");
+  } catch (error) {
+    copied = false;
+  }
+
+  document.body.removeChild(textarea);
+  return copied;
+};
 
 const showToast = (message) => {
   if (!toast) {
@@ -38,7 +62,7 @@ const navObserver = new IntersectionObserver(
 
       const id = entry.target.getAttribute("id");
 
-      navLinks.forEach((link) => {
+      [...navLinks, ...sidebarLinks].forEach((link) => {
         const active = link.getAttribute("href") === `#${id}`;
         link.dataset.active = active ? "true" : "false";
         link.setAttribute("aria-current", active ? "location" : "false");
@@ -121,10 +145,25 @@ copyButtons.forEach((button) => {
     }
 
     try {
-      await navigator.clipboard.writeText(text);
-      showToast("Copied to clipboard.");
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        showToast("Copied to clipboard.");
+        return;
+      }
+
+      if (legacyCopy(text)) {
+        showToast("Copied to clipboard.");
+        return;
+      }
+
+      showToast("Select and copy manually.");
     } catch (error) {
-      showToast("Clipboard copy failed.");
+      if (legacyCopy(text)) {
+        showToast("Copied to clipboard.");
+        return;
+      }
+
+      showToast("Select and copy manually.");
     }
   });
 });
