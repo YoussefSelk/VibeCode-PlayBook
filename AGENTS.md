@@ -1,4 +1,4 @@
-# ResuMateAI Agent Workflow
+# VibeCoders-PlayBook Agent Workflow
 
 This repo is designed to improve agent coordination without wasting context.
 
