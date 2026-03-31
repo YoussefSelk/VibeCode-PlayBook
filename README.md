@@ -112,3 +112,7 @@ Behavior:
 Do not dump the whole repo context into every task.
 
 Use short, durable docs and load only the files needed for the current pass.
+
+## License
+
+MIT. See `LICENSE`.
