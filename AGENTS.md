@@ -1,224 +1,81 @@
 # ResuMateAI Agent Workflow
 
-This project uses a coordinated multi-agent system designed for production-grade development.
+This repo is designed to improve agent coordination without wasting context.
+
+## Load Order
+
+Always load context in this order:
+
+1. `AGENTS.md`
+2. `agent_docs/active_context.md`
+3. Only the specific `agent_docs/*.md` file needed for the task
+
+Do not bulk-load every doc.
 
 ## Team Roles
 
-- `prompt-engineer`  
-  Converts vague requests into precise, execution-ready prompts and orchestrates agent workflows.
+- `prompt-engineer`
+  Turns rough asks into clear execution prompts and chooses the right agent sequence.
 
-- `db`  
-  Owns schema design, migrations, data integrity, indexing, and persistence-layer compatibility.
+- `db`
+  Owns schema, migrations, queries, and persistence-layer contracts.
 
-- `backend`  
-  Owns APIs, controllers, services, validation, authentication, and business logic.
+- `backend`
+  Owns APIs, business logic, validation, auth, and backend contracts.
 
-- `frontend`  
-  Owns UI, components, UX behavior, responsiveness, accessibility, and client-side state.
+- `frontend`
+  Owns UI, client behavior, accessibility, and frontend-side API integration.
 
-- `tester`  
-  Validates real end-to-end behavior across DB → Backend → API → Frontend → User.
+- `tester`
+  Verifies the real runtime flow across layers.
 
-- `reviewer`  
-  Performs final review for correctness, regressions, architecture, security, and performance risks.
+- `reviewer`
+  Performs the final regression and risk review.
 
----
+## Default Flow
 
-## Core Principles
+`prompt-engineer` -> owning agent(s) -> `tester` -> `reviewer`
 
-- Passing tests ≠ working system
-- Each layer must be correct **and** correctly connected
-- Always validate real behavior, not assumptions
-- Prefer simple, explicit, maintainable solutions
-- Adapt to the repository's actual stack instead of forcing one
+Use this unless the task is truly single-layer and low-risk.
 
----
+## Ownership Rules
 
-## Default Workflow
+- `db` for schema or persistence changes
+- `backend` for API or business-logic changes
+- `frontend` for UI or client-state changes
+- `tester` after implementation
+- `reviewer` before calling work done
 
-### 1. Ambiguous / Rough Requests
+If a change affects contracts between layers, verify both sides.
 
-→ Always start with `prompt-engineer`
+## Token Efficiency Rules
 
-Goal:
+- Prefer short durable docs over long repeated prompts.
+- Keep `agent_docs/active_context.md` current and compact.
+- Record durable project facts in `agent_docs/project_brief.md`.
+- Record stack and commands in `agent_docs/tech_stack.md`.
+- Record real verification steps in `agent_docs/verification.md`.
+- Record important decisions in `agent_docs/decisions.md`.
+- Do not restate the whole project in every prompt.
+- Do not force frameworks or folder structures the repo does not already use.
 
-- clarify intent
-- remove ambiguity
-- produce execution-ready prompt(s)
-- define agent sequence if needed
+## Plan -> Execute -> Verify
 
----
+For any meaningful task:
 
-### 2. Implementation
+1. Plan the smallest useful pass
+2. Execute only that pass
+3. Verify before moving forward
 
-Route work strictly by ownership:
+## Definition of Done
 
-- Schema / migrations / queries → `db`
-- API / business logic → `backend`
-- UI / UX / client logic → `frontend`
+A task is only done when:
 
-Rules:
-
-- Do NOT mix responsibilities
-- Avoid multiple agents editing same files unless required
-- If contracts change → update both sides
-- Do not force frameworks, folder structures, or libraries the repo does not already use
-
-Parallel execution:
-
-- Only when layers are independent (e.g. UI + backend endpoints already defined)
-
----
-
-### 3. Validation (MANDATORY)
-
-→ Always use `tester`
-
-Scope:
-
-- DB correctness
-- API contracts
-- frontend integration
-- runtime behavior
-
-Important:
-
-- Do NOT rely only on unit tests
-- Validate real data flow:
-  DB → Backend → API → Frontend
-
----
-
-### 4. Final Review (MANDATORY)
-
-→ Always use `reviewer`
-
-Focus:
-
-- regressions
-- security issues
-- performance risks
-- architectural drift
-- missing test coverage
-
----
-
-## Coordination Rules
-
-- Controllers must stay thin
-- Business logic belongs in services (backend)
-- UI must not contain business logic
-- Database must enforce integrity (not only code)
-
-- If a change impacts:
-  - API shape
-  - DB schema
-  - frontend expectations
-
-→ Validate BOTH sides of the boundary
-
-- If behavior is suspicious:
-  → trust runtime validation (`tester`) over tests
-
----
-
-## Recommended Agent Sequences
-
-### Bug Fix (Full Stack)
-
-prompt-engineer → db/backend/frontend → tester → reviewer
-
----
-
-### Backend Feature
-
-prompt-engineer → backend → tester → reviewer
-
----
-
-### Schema / Migration
-
-prompt-engineer → db → backend (if needed) → tester → reviewer
-
----
-
-### Frontend Feature
-
-prompt-engineer → frontend → tester → reviewer
-
----
-
-### Cross-Layer Feature (IMPORTANT)
-
-prompt-engineer → db → backend → frontend → tester → reviewer
-
----
-
-## Contract Awareness (CRITICAL)
-
-Always verify:
-
-- Field naming consistency  
-  (userId vs user_id)
-
-- Data shape consistency  
-  (DB → API → frontend)
-
-- Type consistency  
-  (nullability, arrays, objects)
-
----
-
-## Definition of Done (VERY IMPORTANT)
-
-A task is ONLY complete when:
-
-- Implementation is correct
-- End-to-end behavior is validated (`tester`)
-- No major risks found (`reviewer`)
-
----
-
-## Prompting Guidance
-
-Every task must clearly define:
-
-- GOAL → what needs to be done
-- SCOPE → which layer(s)
-- TASKS → what to inspect / implement
-- VALIDATION → how success is verified
-- OUTPUT → what the agent must return
-
----
-
-## Failure Detection Mindset
-
-Always assume:
-
-- contracts may be broken
-- data may be inconsistent
-- UI may hide errors
-- tests may be incomplete
-
-Your job is to prove the system works — not assume it.
-
----
+- the owning layer change is correct
+- the runtime behavior is validated when relevant
+- contract mismatches are checked
+- reviewer-level risks are acceptable
 
 ## Key Rule
 
-If the user does not specify:
-→ Start with `prompt-engineer`
-
-Never execute vague requests directly.
-
----
-
-## Repo Workflow Aids
-
-Use these project files to keep sessions consistent:
-
-- `README.md` for the quick-start workflow
-- `docs/VIBE_CODING_PLAYBOOK.md` for the team operating model
-- `docs/PROMPT_TEMPLATES.md` for reusable prompt patterns
-- `docs/SESSION_BRIEF_TEMPLATE.md` for stronger starting context
-- `docs/WORKFLOWS.md` for execution recipes
+If the task is vague, start with `prompt-engineer`.
