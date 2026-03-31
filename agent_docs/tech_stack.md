@@ -35,7 +35,10 @@
 - `docs/index.html`
 - `scripts/install.*`
 - key modules:
-- `.codex/agents/*`
+- `.ai/.agents/*`
+- `.ai/.codex/*`
+- `.ai/.claude/*`
+- `.ai/.github/*`
 - `agent_docs/*`
 - `docs/*`
 - important boundaries:

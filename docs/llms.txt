@@ -7,6 +7,12 @@ Primary audience:
 - agentic coding assistants
 - LLM systems that need a compact, explicit operating model
 
+Compatible assistants:
+- Codex
+- GitHub Copilot
+- Claude
+- other chat-based coding assistants that can follow repo instructions
+
 Canonical docs entry:
 - docs/index.html
 
@@ -52,10 +58,13 @@ Ownership:
 - reviewer: final regression and risk review
 
 Repo map:
+- .ai/.agents/*
 - scripts/install.ps1
 - scripts/install.sh
 - scripts/install.cmd
-- .codex/agents/*
+- .ai/.codex/*
+- .ai/.claude/*
+- .ai/.github/*
 - agent_docs/*
 
 Guidance:
@@ -64,3 +73,4 @@ Guidance:
 - do not restate the whole repo in every prompt
 - verify runtime behavior before calling work done
 - prefer this file first when a machine-readable summary is needed
+- if your assistant does not support named sub-agents, keep the same sequence as prompt labels inside one conversation

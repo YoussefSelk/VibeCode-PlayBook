@@ -1,18 +1,36 @@
 const navLinks = document.querySelectorAll(".nav-links a");
 const sidebarLinks = document.querySelectorAll(".sidebar-nav a");
-const sections = document.querySelectorAll("main section[id]");
+const sections = document.querySelectorAll(".docs-main > [id]");
 const revealBlocks = document.querySelectorAll(".reveal");
 const tabButtons = document.querySelectorAll(".tab-button");
 const installPanels = document.querySelectorAll(".install-panel");
 const filterButtons = document.querySelectorAll(".filter-chip");
+const assistantButtons = document.querySelectorAll(".assistant-chip");
 const roleChips = document.querySelectorAll(".role-chip");
 const copyButtons = document.querySelectorAll("[data-copy]");
 const toast = document.getElementById("toast");
+const powershellBlock = document.getElementById("powershell-block");
+const bashBlock = document.getElementById("bash-block");
+const assistantLabelPs = document.getElementById("assistant-label-ps");
+const assistantLabelBash = document.getElementById("assistant-label-bash");
+
+const assistantLabels = {
+  codex: "Codex",
+  claude: "Claude",
+  github: "GitHub Copilot",
+};
+
+let selectedAssistant = "codex";
+
+const buildCommands = (assistant) => ({
+  powershell: `iex "& { $(irm https://raw.githubusercontent.com/YoussefSelk/VibeCode-PlayBook/main/scripts/install.ps1) } -Assistant ${assistant}"`,
+  bash: `curl -fsSL https://raw.githubusercontent.com/YoussefSelk/VibeCode-PlayBook/main/scripts/install.sh | bash -s -- --assistant ${assistant}`,
+});
 
 const copyMap = {
   prompt: document.getElementById("prompt-block")?.textContent ?? "",
-  powershell: document.getElementById("powershell-block")?.textContent ?? "",
-  bash: document.getElementById("bash-block")?.textContent ?? "",
+  powershell: "",
+  bash: "",
 };
 
 let toastTimer;
@@ -53,52 +71,92 @@ const showToast = (message) => {
   }, 1800);
 };
 
-const navObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) {
-        return;
-      }
+const renderAssistantCommands = () => {
+  const commands = buildCommands(selectedAssistant);
+  copyMap.powershell = commands.powershell;
+  copyMap.bash = commands.bash;
 
-      const id = entry.target.getAttribute("id");
+  if (powershellBlock) {
+    powershellBlock.textContent = commands.powershell;
+  }
 
-      [...navLinks, ...sidebarLinks].forEach((link) => {
-        const active = link.getAttribute("href") === `#${id}`;
-        link.dataset.active = active ? "true" : "false";
-        link.setAttribute("aria-current", active ? "location" : "false");
+  if (bashBlock) {
+    bashBlock.textContent = commands.bash;
+  }
+
+  if (assistantLabelPs) {
+    assistantLabelPs.textContent = assistantLabels[selectedAssistant];
+  }
+
+  if (assistantLabelBash) {
+    assistantLabelBash.textContent = assistantLabels[selectedAssistant];
+  }
+};
+
+const setActiveNav = (id) => {
+  [...navLinks, ...sidebarLinks].forEach((link) => {
+    const active = link.getAttribute("href") === `#${id}`;
+    link.dataset.active = active ? "true" : "false";
+
+    if (active) {
+      link.setAttribute("aria-current", "location");
+      return;
+    }
+
+    link.removeAttribute("aria-current");
+  });
+};
+
+if ("IntersectionObserver" in window) {
+  const navObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) {
+          return;
+        }
+
+        const id = entry.target.getAttribute("id");
+        if (id) {
+          setActiveNav(id);
+        }
       });
-    });
-  },
-  {
-    threshold: 0.35,
-    rootMargin: "-10% 0px -40% 0px",
-  }
-);
+    },
+    {
+      threshold: 0.35,
+      rootMargin: "-10% 0px -40% 0px",
+    }
+  );
 
-sections.forEach((section) => {
-  navObserver.observe(section);
-});
+  sections.forEach((section) => {
+    navObserver.observe(section);
+  });
 
-const revealObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) {
-        return;
-      }
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) {
+          return;
+        }
 
-      entry.target.classList.add("is-visible");
-      revealObserver.unobserve(entry.target);
-    });
-  },
-  {
-    threshold: 0.14,
-  }
-);
+        entry.target.classList.add("is-visible");
+        revealObserver.unobserve(entry.target);
+      });
+    },
+    {
+      threshold: 0.14,
+    }
+  );
 
-revealBlocks.forEach((block, index) => {
-  block.style.transitionDelay = `${Math.min(index * 45, 220)}ms`;
-  revealObserver.observe(block);
-});
+  revealBlocks.forEach((block, index) => {
+    block.style.transitionDelay = `${Math.min(index * 45, 220)}ms`;
+    revealObserver.observe(block);
+  });
+} else {
+  setActiveNav("top");
+  revealBlocks.forEach((block) => {
+    block.classList.add("is-visible");
+  });
+}
 
 tabButtons.forEach((button) => {
   button.addEventListener("click", () => {
@@ -108,20 +166,33 @@ tabButtons.forEach((button) => {
       const active = candidate === button;
       candidate.classList.toggle("is-active", active);
       candidate.setAttribute("aria-selected", active ? "true" : "false");
+      candidate.setAttribute("tabindex", active ? "0" : "-1");
     });
 
     installPanels.forEach((panel) => {
-      panel.classList.toggle("is-active", panel.dataset.panel === selectedTab);
+      const active = panel.dataset.panel === selectedTab;
+      panel.classList.toggle("is-active", active);
+      panel.hidden = !active;
     });
   });
 });
 
 filterButtons.forEach((button) => {
   button.addEventListener("click", () => {
+    if (button.dataset.assistant) {
+      return;
+    }
+
     const selectedFilter = button.dataset.filter;
 
     filterButtons.forEach((candidate) => {
-      candidate.classList.toggle("is-active", candidate === button);
+      if (candidate.dataset.assistant) {
+        return;
+      }
+
+      const active = candidate === button;
+      candidate.classList.toggle("is-active", active);
+      candidate.setAttribute("aria-pressed", active ? "true" : "false");
     });
 
     roleChips.forEach((chip) => {
@@ -131,6 +202,20 @@ filterButtons.forEach((button) => {
 
       chip.classList.toggle("is-dimmed", !matches);
     });
+  });
+});
+
+assistantButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    selectedAssistant = button.dataset.assistant ?? "codex";
+
+    assistantButtons.forEach((candidate) => {
+      const active = candidate === button;
+      candidate.classList.toggle("is-active", active);
+      candidate.setAttribute("aria-pressed", active ? "true" : "false");
+    });
+
+    renderAssistantCommands();
   });
 });
 
@@ -167,3 +252,6 @@ copyButtons.forEach((button) => {
     }
   });
 });
+
+renderAssistantCommands();
+setActiveNav("top");

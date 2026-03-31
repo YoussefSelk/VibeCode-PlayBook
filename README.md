@@ -1,7 +1,7 @@
 
 # VibeCoders-PlayBook
 
-This repo is a lean Codex multi-agent layer you can drop into a real project.
+This repo is a lean multi-agent playbook you can drop into a real project.
 
 ## Docs Site
 
@@ -12,7 +12,10 @@ This repo now includes a GitHub Pages-ready static guide in `docs/`.
 - expanded LLM guide: `docs/llms-full.txt`
 - deploy workflow: `.github/workflows/deploy-pages.yml`
 
+The guidance is written to work with Codex, GitHub Copilot, Claude, and other chat-first coding assistants.
+
 If you use GitHub Pages with GitHub Actions, pushes to `main` that change `docs/` will deploy the site automatically.
+Set the repository Pages source to `GitHub Actions` in GitHub settings if Pages is not already enabled.
 
 Purpose:
 - better agent coordination
@@ -25,16 +28,12 @@ Purpose:
 - `AGENTS.md`
   Main operating rules for the whole team.
 
-- `.codex/agents/`
-  Specialized agents:
-  - `prompt-engineer`
-  - `db`
-  - `backend`
-  - `frontend`
-  - `tester`
-  - `security`
-  - `legal`
-  - `reviewer`
+- `.ai/`
+  Assistant-specific install packs:
+  - `.ai/.agents/`
+  - `.ai/.codex/`
+  - `.ai/.claude/`
+- `.ai/.github/`
 
 - `agent_docs/`
   Progressive-disclosure context files.
@@ -68,6 +67,25 @@ Bash into a specific folder:
 curl -fsSL https://raw.githubusercontent.com/YoussefSelk/VibeCode-PlayBook/main/scripts/install.sh | bash -s -- --destination /path/to/your/project
 ```
 
+The installer will prompt you to choose the assistant pack:
+- `codex`
+- `claude`
+- `github` for GitHub Copilot
+
+You can also skip the menu explicitly:
+
+PowerShell:
+
+```powershell
+iex "& { $(irm https://raw.githubusercontent.com/YoussefSelk/VibeCode-PlayBook/main/scripts/install.ps1) } -Assistant codex"
+```
+
+Bash:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/YoussefSelk/VibeCode-PlayBook/main/scripts/install.sh | bash -s -- --assistant codex
+```
+
 ### 2. Fill the minimum context
 
 After install, fill these files first:
@@ -79,6 +97,16 @@ After install, fill these files first:
 
 Keep them short.
 These files exist to reduce repeated prompting.
+
+### GitHub Pages
+
+The static docs site is deployed by `.github/workflows/deploy-pages.yml`.
+
+To publish it:
+
+- enable GitHub Pages for the repository
+- choose `GitHub Actions` as the Pages source
+- push a change to `main` that touches `docs/` or the workflow file
 
 ### 3. Start with `prompt-engineer`
 
@@ -122,13 +150,13 @@ Overwrite existing files:
 PowerShell:
 
 ```powershell
-iex "& { $(irm https://raw.githubusercontent.com/YoussefSelk/VibeCode-PlayBook/main/scripts/install.ps1) } -Destination 'C:\path\to\your\project' -Force"
+iex "& { $(irm https://raw.githubusercontent.com/YoussefSelk/VibeCode-PlayBook/main/scripts/install.ps1) } -Destination 'C:\path\to\your\project' -Assistant codex -Force"
 ```
 
 Bash:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/YoussefSelk/VibeCode-PlayBook/main/scripts/install.sh | bash -s -- --destination /path/to/your/project --force
+curl -fsSL https://raw.githubusercontent.com/YoussefSelk/VibeCode-PlayBook/main/scripts/install.sh | bash -s -- --destination /path/to/your/project --assistant codex --force
 ```
 
 Overwrite and create backups first:
@@ -136,13 +164,13 @@ Overwrite and create backups first:
 PowerShell:
 
 ```powershell
-iex "& { $(irm https://raw.githubusercontent.com/YoussefSelk/VibeCode-PlayBook/main/scripts/install.ps1) } -Destination 'C:\path\to\your\project' -Force -Backup"
+iex "& { $(irm https://raw.githubusercontent.com/YoussefSelk/VibeCode-PlayBook/main/scripts/install.ps1) } -Destination 'C:\path\to\your\project' -Assistant codex -Force -Backup"
 ```
 
 Bash:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/YoussefSelk/VibeCode-PlayBook/main/scripts/install.sh | bash -s -- --destination /path/to/your/project --force --backup
+curl -fsSL https://raw.githubusercontent.com/YoussefSelk/VibeCode-PlayBook/main/scripts/install.sh | bash -s -- --destination /path/to/your/project --assistant codex --force --backup
 ```
 
 ### Step 2. Add the durable project context
@@ -342,14 +370,17 @@ Use short, durable docs and load only the files needed for the current pass.
 
 ## Install Notes
 
-The installer adds only the core files:
+The installer adds the common core files plus only the selected assistant pack:
 - `AGENTS.md`
-- `.codex/config.toml`
-- `.codex/agents/*`
+- `.agents/*`
+- `.codex/*` for Codex installs
+- `CLAUDE.md` for Claude installs
+- `.github/copilot-instructions.md`, `.github/instructions/*`, and `.github/agents/*` for GitHub Copilot installs
 - `agent_docs/*`
 
 Behavior:
 - existing files are skipped by default
+- assistant pack is chosen through a menu unless `-Assistant` or `--assistant` is provided
 - `-Force` or `--force` overwrites existing files
 - `-Backup` or `--backup` creates timestamped backups before overwrite
 - PowerShell uses `Invoke-WebRequest`

@@ -2,6 +2,12 @@
 
 This repository provides a lightweight multi-agent operating layer that can be installed into another project.
 
+Compatible assistants:
+- Codex
+- GitHub Copilot
+- Claude
+- other chat-based coding assistants that can follow repo instructions and repo-local files
+
 Core purpose:
 - better agent coordination
 - less repeated context
@@ -59,9 +65,21 @@ Install entry points:
 - scripts/install.sh
 - scripts/install.cmd
 
+Assistant pack source layout:
+- .ai/.agents/*
+- .ai/.codex/*
+- .ai/.claude/*
+- .ai/.github/*
+
 Human prompt pattern:
 Have prompt-engineer turn this into a clear execution prompt:
 "[rough request here]"
+
+Assistant adaptation notes:
+- if the tool supports custom agents or agent profiles, map the repo roles directly
+- if the tool is single-threaded, treat `prompt-engineer`, `tester`, `security`, `legal`, and `reviewer` as explicit phases in one chat
+- for GitHub Copilot Chat, paste the role and validation instructions into the chat before implementation work
+- for Claude, load AGENTS.md first, then active_context.md, then only the specific docs needed for the current pass
 
 Key constraints for agents:
 - prefer short durable docs over long repeated prompts

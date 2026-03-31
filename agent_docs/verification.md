@@ -16,9 +16,11 @@
 ## Manual Validation
 
 - flow 1:
-- open `docs/index.html` and confirm navigation, section links, and local asset loading work
+- serve the repo locally and open `docs/index.html`, then confirm navigation, section links, install tabs, role filters, copy buttons, and local asset loading work
 - flow 2:
 - confirm `docs/llms.txt` and `docs/llms-full.txt` accurately reflect the workflow and key files
+- flow 3:
+- confirm `.github/workflows/deploy-pages.yml` publishes `docs/` and that repository Pages is configured to use GitHub Actions
 
 ## High-Risk Areas
 

@@ -22,10 +22,11 @@ Keep it short.
 ## Current Task
 
 - task:
-- create and document a GitHub Pages site that teaches how to use this repo
+- harden and document the GitHub Pages site so the onboarding flow and deployment path are both ready to use
 - owner agent(s):
 - prompt-engineer
 - frontend
+- tester
 - reviewer
 
 ## Known Issues
@@ -40,6 +41,7 @@ Keep it short.
 - checks to run:
 - verify `docs/index.html` references local assets correctly
 - verify GitHub Actions workflow targets `docs/`
+- verify the docs interactions still work when served locally
 - runtime flow to verify:
 - a push to `main` should publish the static site to GitHub Pages
 
