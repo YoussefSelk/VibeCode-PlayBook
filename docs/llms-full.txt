@@ -63,6 +63,7 @@ Important repo files:
 - agent_docs/verification.md
 - agent_docs/decisions.md
 - docs/index.html
+- docs/pages/resources.html
 - docs/llms.txt
 
 Install entry points:

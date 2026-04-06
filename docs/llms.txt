@@ -15,6 +15,7 @@ Compatible assistants:
 
 Canonical docs entry:
 - docs/index.html
+- docs/pages/resources.html
 
 Primary files:
 - AGENTS.md: operating rules, ownership, load order, and definition of done
