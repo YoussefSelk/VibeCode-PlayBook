@@ -46,14 +46,14 @@ VibeCoders Playbook addresses this with:
 
 ```mermaid
 flowchart LR
-  U[User Goal] --> P[prompt-engineer]
-  P --> O[Owning Agent(s)]
-  O --> T[tester]
-  T --> R[reviewer]
+  U["User Goal"] --> P["prompt-engineer"]
+  P --> O["Owning Agents"]
+  O --> T["tester"]
+  T --> R["reviewer"]
 
-  O -. security-sensitive .-> S[security]
-  O -. legal-sensitive .-> L[legal]
-  O -. deployment/infra-sensitive .-> D[devops]
+  O -. "security-sensitive" .-> S["security"]
+  O -. "legal-sensitive" .-> L["legal"]
+  O -. "deployment/infra-sensitive" .-> D["devops"]
 
   S --> R
   L --> R
