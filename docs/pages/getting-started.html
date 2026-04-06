@@ -187,17 +187,30 @@ curl -fsSL https://raw.githubusercontent.com/YoussefSelk/VibeCode-PlayBook/main/
             <div class="grid-2">
               <article class="card">
                 <h3>PowerShell examples</h3>
-                <ul>
-                  <li>Menu mode: run the default command and choose 1/2/3.</li>
-                  <li>Force Claude: <code>-Assistant claude</code></li>
+                <ul class="command-examples">
                   <li>
-                    Install to folder:
-                    <code>-Destination 'C:\\path\\to\\project'</code>
+                    <span class="command-label">Menu mode</span>
+                    <span class="meta"
+                      >run the default command and choose 1/2/3</span
+                    >
                   </li>
-                  <li>Overwrite safely: <code>-Force -Backup</code></li>
                   <li>
-                    Custom source:
-                    <code
+                    <span class="command-label">Force Claude</span>
+                    <code class="command-snippet">-Assistant claude</code>
+                  </li>
+                  <li>
+                    <span class="command-label">Install to folder</span>
+                    <code class="command-snippet"
+                      >-Destination 'C:\\path\\to\\project'</code
+                    >
+                  </li>
+                  <li>
+                    <span class="command-label">Overwrite safely</span>
+                    <code class="command-snippet">-Force -Backup</code>
+                  </li>
+                  <li>
+                    <span class="command-label">Custom source</span>
+                    <code class="command-snippet"
                       >-RepoBase
                       https://raw.githubusercontent.com/&lt;owner&gt;/&lt;repo&gt;/main</code
                     >
@@ -206,17 +219,30 @@ curl -fsSL https://raw.githubusercontent.com/YoussefSelk/VibeCode-PlayBook/main/
               </article>
               <article class="card">
                 <h3>Bash examples</h3>
-                <ul>
-                  <li>Menu mode: run the default command and choose 1/2/3.</li>
-                  <li>Force GitHub: <code>--assistant github</code></li>
+                <ul class="command-examples">
                   <li>
-                    Install to folder:
-                    <code>--destination /path/to/project</code>
+                    <span class="command-label">Menu mode</span>
+                    <span class="meta"
+                      >run the default command and choose 1/2/3</span
+                    >
                   </li>
-                  <li>Overwrite safely: <code>--force --backup</code></li>
                   <li>
-                    Custom source:
-                    <code
+                    <span class="command-label">Force GitHub</span>
+                    <code class="command-snippet">--assistant github</code>
+                  </li>
+                  <li>
+                    <span class="command-label">Install to folder</span>
+                    <code class="command-snippet"
+                      >--destination /path/to/project</code
+                    >
+                  </li>
+                  <li>
+                    <span class="command-label">Overwrite safely</span>
+                    <code class="command-snippet">--force --backup</code>
+                  </li>
+                  <li>
+                    <span class="command-label">Custom source</span>
+                    <code class="command-snippet"
                       >--repo-base
                       https://raw.githubusercontent.com/&lt;owner&gt;/&lt;repo&gt;/main</code
                     >
