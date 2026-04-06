@@ -47,6 +47,7 @@ COMMON_FILES=(
   "AGENTS.md"
   ".ai/.agents/README.md:.agents/README.md"
   ".ai/.agents/roles.md:.agents/roles.md"
+  ".ai/.agents/reference-links.md:.agents/reference-links.md"
   "agent_docs/README.md"
   "agent_docs/project_brief.md"
   "agent_docs/tech_stack.md"

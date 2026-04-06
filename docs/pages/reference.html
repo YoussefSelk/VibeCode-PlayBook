@@ -125,6 +125,7 @@
             <h3>Core docs map</h3>
             <ul>
               <li>AGENTS.md</li>
+              <li>.agents/reference-links.md</li>
               <li>agent_docs/active_context.md</li>
               <li>agent_docs/project_brief.md</li>
               <li>agent_docs/tech_stack.md</li>
@@ -200,6 +201,45 @@
                   <td>Use custom source mirror</td>
                   <td><code>-RepoBase</code></td>
                   <td><code>--repo-base</code></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="panel section">
+          <p class="eyebrow">Inter-Agent Contract</p>
+          <h2>Required handoff checklist</h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Field</th>
+                  <th>Why it matters</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>goal</td>
+                  <td>Defines what the next agent must achieve.</td>
+                </tr>
+                <tr>
+                  <td>scope</td>
+                  <td>Prevents drift outside target files/symbols/flows.</td>
+                </tr>
+                <tr>
+                  <td>changes + evidence</td>
+                  <td>Makes state reproducible and verifiable.</td>
+                </tr>
+                <tr>
+                  <td>risks</td>
+                  <td>Surfaces assumptions, blockers, and open questions.</td>
+                </tr>
+                <tr>
+                  <td>next-owner + done-criteria</td>
+                  <td>
+                    Ensures clean ownership transfer and clear exit gates.
+                  </td>
                 </tr>
               </tbody>
             </table>

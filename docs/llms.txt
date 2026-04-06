@@ -22,6 +22,7 @@ Primary files:
 - agent_docs/project_brief.md: durable product context
 - agent_docs/tech_stack.md: actual stack, commands, boundaries, environment
 - agent_docs/verification.md: real checks and manual validation steps
+- .agents/reference-links.md: objective-based external references by domain
 - README.md: installation and usage guide
 
 Required load order:
@@ -81,3 +82,12 @@ Guidance:
 - verify runtime behavior before calling work done
 - prefer this file first when a machine-readable summary is needed
 - if your assistant does not support named sub-agents, keep the same sequence as prompt labels inside one conversation
+
+Inter-agent handoff contract (required):
+- goal
+- scope
+- changes
+- evidence
+- risks
+- next-owner
+- done-criteria

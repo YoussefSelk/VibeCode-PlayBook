@@ -40,6 +40,7 @@ $commonFiles = @(
   "AGENTS.md",
   ".ai/.agents/README.md",
   ".ai/.agents/roles.md",
+  ".ai/.agents/reference-links.md",
   "agent_docs/README.md",
   "agent_docs/project_brief.md",
   "agent_docs/tech_stack.md",
@@ -152,6 +153,8 @@ foreach ($relativePath in $commonFiles) {
     $targetPath = ".agents/README.md"
   } elseif ($relativePath -eq ".ai/.agents/roles.md") {
     $targetPath = ".agents/roles.md"
+  } elseif ($relativePath -eq ".ai/.agents/reference-links.md") {
+    $targetPath = ".agents/reference-links.md"
   }
 
   $files += @{ Source = $relativePath; Target = $targetPath }

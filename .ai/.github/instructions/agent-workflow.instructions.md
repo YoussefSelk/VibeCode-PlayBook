@@ -19,6 +19,16 @@ Escalation:
 - Include legal for privacy, consent, analytics, retention, AI disclosures, or policy-sensitive copy.
 - Include devops for CI/CD, deployment, environment, and infrastructure delivery changes.
 
+Handoff contract (required between agents):
+
+- goal
+- scope (files/symbols/flows)
+- changes
+- evidence (commands/tests/results)
+- risks (assumptions/open questions)
+- next-owner
+- done-criteria
+
 Definition of done:
 
 - owning layer change is correct

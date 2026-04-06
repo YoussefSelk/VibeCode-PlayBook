@@ -1,446 +1,224 @@
 # VibeCoders Playbook
 
-This repo is a lean multi-agent playbook you can drop into a real project.
+[![Docs Site](https://img.shields.io/badge/docs-GitHub%20Pages-0f8b8d)](docs/index.html)
+[![License: MIT](https://img.shields.io/badge/license-MIT-2d6a4f.svg)](LICENSE)
+[![Workflow](https://img.shields.io/badge/workflow-multi--agent-1d3557)](AGENTS.md)
 
-## Docs Site
+A production-minded, multi-agent operating layer you can drop into real projects.
 
-This repo now includes a GitHub Pages-ready static guide in `docs/`.
+> [!IMPORTANT]
+> This repository is designed for reliable execution, not prompt theater.
+> It enforces ownership, validation depth, and risk gates across Claude, GitHub Copilot, and Codex.
 
-- human-friendly entry page: `docs/index.html`
-- machine-readable onboarding: `docs/llms.txt`
-- expanded LLM guide: `docs/llms-full.txt`
-- deploy workflow: `.github/workflows/deploy-pages.yml`
+## Table Of Contents
 
-The guidance is written to work with Codex, GitHub Copilot, Claude, and other chat-first coding assistants.
+- [What This Solves](#what-this-solves)
+- [Architecture At A Glance](#architecture-at-a-glance)
+- [Install In 60 Seconds](#install-in-60-seconds)
+- [Execution Model](#execution-model)
+- [Inter-Agent Handoff Contract](#inter-agent-handoff-contract)
+- [Role Map](#role-map)
+- [Production Baseline](#production-baseline)
+- [Machine-Readable Entry Points](#machine-readable-entry-points)
+- [Reference Catalog](#reference-catalog)
+- [Docs Site](#docs-site)
+- [License](#license)
 
-If you use GitHub Pages with GitHub Actions, pushes to `main` that change `docs/` will deploy the site automatically.
-Set the repository Pages source to `GitHub Actions` in GitHub settings if Pages is not already enabled.
+## What This Solves
 
-Purpose:
+Without structure, agent-driven work usually fails in predictable ways:
 
-- better agent coordination
-- less repeated context
-- fewer wasted tokens
-- stronger end-to-end validation
+- context overload
+- ownership ambiguity
+- weak runtime validation
+- security/legal/devops review gaps
+- noisy handoffs
 
-## What You Get
+VibeCoders Playbook addresses this with:
 
-- `AGENTS.md`
-  Main operating rules for the whole team.
+- explicit role ownership and escalation chains
+- progressive context loading rules
+- mandatory inter-agent handoff contract
+- deploy-ready docs and CI checks
+- assistant-specific packs for Claude, GitHub Copilot, and Codex
 
-- `.ai/`
-  Assistant-specific install packs:
-  - `.ai/.agents/`
-  - `.ai/.codex/`
-  - `.ai/.claude/`
-- `.ai/.github/`
+## Architecture At A Glance
 
-- `agent_docs/`
-  Progressive-disclosure context files.
-  Only load what the current task needs.
+```mermaid
+flowchart LR
+  U[User Goal] --> P[prompt-engineer]
+  P --> O[Owning Agent(s)]
+  O --> T[tester]
+  T --> R[reviewer]
 
-## Open Source Baseline
+  O -. security-sensitive .-> S[security]
+  O -. legal-sensitive .-> L[legal]
+  O -. deployment/infra-sensitive .-> D[devops]
 
-This repository includes standard open source governance and maintenance files:
+  S --> R
+  L --> R
+  D --> R
+```
 
-- `LICENSE`
-- `CODE_OF_CONDUCT.md`
-- `CONTRIBUTING.md`
-- `SECURITY.md`
-- `SUPPORT.md`
-- `CHANGELOG.md`
-- `CITATION.cff`
-- `.github/CODEOWNERS`
-- `.github/ISSUE_TEMPLATE/*`
-- `.github/PULL_REQUEST_TEMPLATE.md`
-- `.github/dependabot.yml`
+> [!TIP]
+> Default chain: prompt-engineer -> owner(s) -> tester -> reviewer.
 
-## Quick Start
+## Install In 60 Seconds
 
-### 1. Install into your project
+### Standard install
 
-PowerShell:
+<details>
+<summary>PowerShell</summary>
 
 ```powershell
 iex "& { $(irm https://raw.githubusercontent.com/YoussefSelk/VibeCode-PlayBook/main/scripts/install.ps1) }"
 ```
 
-PowerShell into a specific folder:
-
 ```powershell
 iex "& { $(irm https://raw.githubusercontent.com/YoussefSelk/VibeCode-PlayBook/main/scripts/install.ps1) } -Destination 'C:\path\to\your\project'"
 ```
 
-Bash:
+</details>
+
+<details>
+<summary>Bash</summary>
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/YoussefSelk/VibeCode-PlayBook/main/scripts/install.sh | bash
 ```
 
-Bash into a specific folder:
-
 ```bash
 curl -fsSL https://raw.githubusercontent.com/YoussefSelk/VibeCode-PlayBook/main/scripts/install.sh | bash -s -- --destination /path/to/your/project
 ```
 
-By default, the installer shows an assistant menu in interactive terminals.
-In non-interactive environments (for example CI), it falls back to `codex`:
+</details>
+
+### Assistant selection behavior
+
+- interactive terminal: menu (codex / claude / github)
+- non-interactive terminal: defaults to codex
+- explicit override:
+  - PowerShell: -Assistant codex|claude|github
+  - Bash: --assistant codex|claude|github
 
-- `codex`
-- `claude`
-- `github` for GitHub Copilot
+### Overwrite options
 
-Use an explicit assistant only if you want a different pack:
+- force overwrite:
+  - PowerShell: -Force
+  - Bash: --force
+- create backups before overwrite:
+  - PowerShell: -Backup
+  - Bash: --backup
 
-PowerShell:
+## Execution Model
 
-```powershell
-iex "& { $(irm https://raw.githubusercontent.com/YoussefSelk/VibeCode-PlayBook/main/scripts/install.ps1) } -Assistant claude"
-```
+### Load order (strict)
 
-Bash:
+1. AGENTS.md
+2. agent_docs/active_context.md
+3. only the specific agent_docs files needed for the current pass
 
-```bash
-curl -fsSL https://raw.githubusercontent.com/YoussefSelk/VibeCode-PlayBook/main/scripts/install.sh | bash -s -- --assistant claude
-```
+### Durable context files
 
-If you also need GitHub Copilot files, run with `github` instead.
+- agent_docs/project_brief.md
+- agent_docs/tech_stack.md
+- agent_docs/active_context.md
+- agent_docs/verification.md
+- agent_docs/decisions.md
 
-### 2. Fill the minimum context
+> [!NOTE]
+> Keep context files short and current. Stale long docs burn tokens and reduce quality.
 
-After install, fill these files first:
+## Inter-Agent Handoff Contract
 
-- `agent_docs/project_brief.md`
-- `agent_docs/tech_stack.md`
-- `agent_docs/active_context.md`
-- `agent_docs/verification.md`
+Every handoff must include all fields below.
 
-Keep them short.
-These files exist to reduce repeated prompting.
+| Field         | Why it exists                                     |
+| ------------- | ------------------------------------------------- |
+| goal          | Defines the exact objective for next owner        |
+| scope         | Prevents drift outside files/symbols/flows        |
+| changes       | Captures what is already done/investigated        |
+| evidence      | Makes state reproducible (commands/tests/results) |
+| risks         | Surfaces assumptions, blockers, open questions    |
+| next-owner    | Removes ownership ambiguity                       |
+| done-criteria | Defines objective finish gates                    |
 
-### GitHub Pages
+### Handoff quality rules
 
-The static docs site is deployed by `.github/workflows/deploy-pages.yml`.
+- never hand off with vague text like "check this"
+- always include reproducible validation steps
+- when blocked, state blocker and smallest unblock path
+- if contracts changed, call out impacted layers explicitly
 
-To publish it:
+## Role Map
 
-- enable GitHub Pages for the repository
-- choose `GitHub Actions` as the Pages source
-- push a change to `main` that touches `docs/` or the workflow file
+| Role            | Ownership                                                |
+| --------------- | -------------------------------------------------------- |
+| prompt-engineer | turns rough asks into executable multi-agent prompts     |
+| db              | schema, migrations, persistence contracts                |
+| backend         | APIs, validation, business logic, auth                   |
+| frontend        | UI, accessibility, client integration                    |
+| devops          | CI/CD, deployment safety, environment, infra operability |
+| tester          | runtime and cross-layer validation                       |
+| security        | auth, secrets, trust boundaries, sensitive data          |
+| legal           | privacy, consent, retention, policy-sensitive flows      |
+| reviewer        | final regression and risk gate                           |
 
-Production defaults included in this repo:
+## Production Baseline
 
-- least-privilege GitHub Actions permissions for Pages deploy
-- `robots.txt` + `sitemap.xml` configured for crawler discovery
-- strict browser security meta policies (CSP, Referrer Policy, Permissions Policy)
-- responsive static pages with no build step required
+This repository includes production-friendly open source foundations:
 
-Installer UX defaults included in this repo:
+- LICENSE
+- CODE_OF_CONDUCT.md
+- CONTRIBUTING.md
+- SECURITY.md
+- SUPPORT.md
+- CHANGELOG.md
+- CITATION.cff
+- .github/CODEOWNERS
+- .github/ISSUE_TEMPLATE/\*
+- .github/PULL_REQUEST_TEMPLATE.md
+- .github/dependabot.yml
 
-- colored status output in both PowerShell and Bash installers
-- branded installer banner
-- deterministic one-command install with `codex` as default assistant pack
-- explicit assistant override for `claude` and `github`
+And CI workflows:
 
-### 3. Start with `prompt-engineer`
+- .github/workflows/deploy-pages.yml
+- .github/workflows/installer-smoke-tests.yml
+- .github/workflows/repo-production-readiness.yml
 
-Do not start with a vague implementation prompt.
+## Machine-Readable Entry Points
 
-Start with:
+- docs/llms.txt
+- docs/llms-full.txt
+- docs/robots.txt
+- docs/sitemap.xml
 
-```text
-Have prompt-engineer turn this into a clear execution prompt:
-"[your rough request here]"
-```
+## Reference Catalog
 
-### 4. Let the owning agent implement
+Use this for objective-matched research links:
 
-Use the right specialist:
+- .agents/reference-links.md
 
-- `db` for schema, migrations, persistence, data contracts
-- `backend` for APIs, validation, business logic, auth
-- `frontend` for UI, forms, client behavior, accessibility
-- `devops` for CI/CD, deployment safety, environment, and infrastructure delivery
+Categories include frontend, backend, databases, devops, security, testing, system design, prompt engineering, token optimization, memory management, vibe coding robustness, and more.
 
-### 5. Verify the real behavior
+> [!TIP]
+> Pull only the relevant section for the current task. Do not load the whole catalog by default.
 
-After implementation:
+## Docs Site
 
-- use `tester` for runtime and integration validation
-- use `security` for attack-surface or sensitive-data work
-- use `legal` for privacy, consent, policy, or claim-sensitive work
-- use `devops` for pipeline, deploy, and runtime operability validation
-- use `reviewer` for the final regression/risk pass
+GitHub Pages-ready static site is in docs:
 
-## Step-by-Step Usage Guide
+- docs/index.html
+- docs/pages/getting-started.html
+- docs/pages/reference.html
+- docs/pages/ai-agents.html
 
-### Step 1. Drop the playbook into a real repo
+Deployment:
 
-Use one of the install commands above.
-
-By default:
-
-- existing files are skipped
-- only the core workflow files are added
-
-Overwrite existing files:
-
-PowerShell:
-
-```powershell
-iex "& { $(irm https://raw.githubusercontent.com/YoussefSelk/VibeCode-PlayBook/main/scripts/install.ps1) } -Destination 'C:\path\to\your\project' -Assistant codex -Force"
-```
-
-Bash:
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/YoussefSelk/VibeCode-PlayBook/main/scripts/install.sh | bash -s -- --destination /path/to/your/project --assistant codex --force
-```
-
-Overwrite and create backups first:
-
-PowerShell:
-
-```powershell
-iex "& { $(irm https://raw.githubusercontent.com/YoussefSelk/VibeCode-PlayBook/main/scripts/install.ps1) } -Destination 'C:\path\to\your\project' -Assistant codex -Force -Backup"
-```
-
-Bash:
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/YoussefSelk/VibeCode-PlayBook/main/scripts/install.sh | bash -s -- --destination /path/to/your/project --assistant codex --force --backup
-```
-
-### Step 2. Add the durable project context
-
-Fill `agent_docs/project_brief.md` with:
-
-- what the product is
-- who it is for
-- core flows
-- constraints
-- quality bar
-
-Fill `agent_docs/tech_stack.md` with:
-
-- actual framework and libraries
-- real commands
-- env/setup notes
-- architecture boundaries
-
-Fill `agent_docs/verification.md` with:
-
-- test commands
-- manual validation steps
-- high-risk areas
-
-### Step 3. Keep `active_context.md` current
-
-This is the most important day-to-day file.
-
-Use `agent_docs/active_context.md` for:
-
-- current goal
-- active scope
-- current task
-- blockers
-- next step
-
-Do not turn it into a diary.
-Keep it compact and current.
-
-### Step 4. Use the right load order
-
-Agents should load context in this order:
-
-1. `AGENTS.md`
-2. `agent_docs/active_context.md`
-3. only the one or two specific `agent_docs/*.md` files needed for the task
-
-This is how you reduce token waste.
-
-### Step 5. Always shape rough requests first
-
-Example:
-
-```text
-Have prompt-engineer rewrite this into a clear multi-agent task:
-"Profile save is broken and I want to make sure it actually works."
-```
-
-What `prompt-engineer` is for:
-
-- remove ambiguity
-- assign the right owners
-- add missing validation steps
-- avoid low-signal prompts
-
-### Step 6. Route work by ownership
-
-Use these rules:
-
-- `db`
-  - schema changes
-  - migrations
-  - persistence logic
-  - data contract issues
-
-- `backend`
-  - endpoints
-  - service logic
-  - validation
-  - auth
-  - integrations
-
-- `frontend`
-  - components
-  - forms
-  - state behavior
-  - request/response handling
-  - accessibility
-
-- `devops`
-  - CI pipeline changes
-  - deployment automation and gates
-  - environment/configuration parity
-  - infrastructure delivery and operability checks
-
-### Step 7. Run the right validation layer
-
-Use `tester` when:
-
-- the task crosses layers
-- the bug survives tests
-- you need real runtime proof
-
-Example:
-
-```text
-Ask tester to verify the full flow from database to backend to frontend.
-Do not stop at unit tests. Reproduce the behavior and identify any contract mismatch.
-```
-
-Use `security` when:
-
-- login/auth/session code changed
-- permissions or roles changed
-- uploads are involved
-- secrets or sensitive data are involved
-- a feature changes trust boundaries
-
-Example:
-
-```text
-Ask security to review this flow for authorization gaps, secret exposure,
-unsafe input handling, and sensitive data leakage.
-```
-
-Use `legal` when:
-
-- privacy or consent changed
-- analytics/cookies/tracking changed
-- retention or deletion behavior changed
-- marketing or product claims are risky
-- AI output disclosures or policy-sensitive flows are involved
-
-Example:
-
-```text
-Ask legal to review this feature for privacy, consent, retention,
-disclosure, and policy-sensitive product risk. Flag anything that should go to counsel.
-```
-
-### Step 8. Finish with `reviewer`
-
-Use `reviewer` as the final serious checkpoint.
-
-Example:
-
-```text
-Ask reviewer to review the changed work for regressions, security risks,
-architecture drift, performance concerns, and missing test coverage.
-```
-
-### Step 9. Use the right workflow for the task
-
-Normal feature:
-
-`prompt-engineer -> implementation agent(s) -> tester -> reviewer`
-
-Security-sensitive feature:
-
-`prompt-engineer -> implementation agent(s) -> tester -> security -> reviewer`
-
-Legal/compliance-sensitive feature:
-
-`prompt-engineer -> implementation agent(s) -> tester -> legal -> reviewer`
-
-Very sensitive feature:
-
-`prompt-engineer -> implementation agent(s) -> tester -> security -> legal -> reviewer`
-
-### Step 10. Update context after each meaningful pass
-
-After finishing work, update:
-
-- `agent_docs/active_context.md`
-- `agent_docs/decisions.md` if a durable decision was made
-- `agent_docs/verification.md` if new checks became important
-
-This keeps the next session fast and avoids re-explaining everything.
-
-## Agent Roles
-
-- `prompt-engineer`
-  Turns rough asks into clear execution prompts and chooses the agent sequence.
-
-- `db`
-  Owns schema, migrations, queries, and persistence-layer contracts.
-
-- `backend`
-  Owns APIs, business logic, validation, auth, and backend contracts.
-
-- `frontend`
-  Owns UI, client behavior, accessibility, and frontend-side API integration.
-
-- `tester`
-  Verifies the real runtime flow across layers.
-
-- `security`
-  Reviews attack surface, auth, permissions, secrets, and data exposure.
-
-- `legal`
-  Reviews privacy, consent, retention, policy-sensitive flows, and risky claims.
-
-- `reviewer`
-  Performs the final regression and risk review.
-
-## Key Idea
-
-Do not dump the whole repo context into every task.
-
-Use short, durable docs and load only the files needed for the current pass.
-
-## Install Notes
-
-The installer adds the common core files plus only the selected assistant pack:
-
-- `AGENTS.md`
-- `.agents/*`
-- `.codex/*` for Codex installs
-- `CLAUDE.md` for Claude installs
-- `.github/copilot-instructions.md`, `.github/instructions/*`, and `.github/agents/*` for GitHub Copilot installs
-- `agent_docs/*`
-
-Behavior:
-
-- existing files are skipped by default
-- assistant pack defaults to `codex` unless `-Assistant` or `--assistant` is provided
-- `-Force` or `--force` overwrites existing files
-- `-Backup` or `--backup` creates timestamped backups before overwrite
-- PowerShell uses `Invoke-WebRequest`
-- Bash uses `curl`, or `wget` if `curl` is unavailable
+- enable GitHub Pages in repo settings
+- choose GitHub Actions as source
+- push changes touching docs/ or deploy workflow
 
 ## License
 
-MIT. See `LICENSE`.
+MIT. See LICENSE.

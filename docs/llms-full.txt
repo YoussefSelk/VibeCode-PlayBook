@@ -56,6 +56,7 @@ Definition of done:
 Important repo files:
 - README.md
 - AGENTS.md
+- .agents/reference-links.md
 - agent_docs/active_context.md
 - agent_docs/project_brief.md
 - agent_docs/tech_stack.md
@@ -93,3 +94,12 @@ Key constraints for agents:
 - record real verification steps in verification.md
 - record important decisions in decisions.md
 - do not force frameworks or structures the target repo does not already use
+
+Required inter-agent handoff contract:
+- goal
+- scope (files/symbols/flows)
+- changes
+- evidence (commands/tests/results)
+- risks (assumptions/open questions/blockers)
+- next-owner
+- done-criteria

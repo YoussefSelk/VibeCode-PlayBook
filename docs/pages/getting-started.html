@@ -72,6 +72,7 @@
             <a href="#install-examples">1c. Command examples</a>
             <a href="#context">2. Context files</a>
             <a href="#flow">3. Role flow</a>
+            <a href="#handoff">3b. Handoff contract</a>
             <a href="#validation">4. Validation</a>
             <a href="#production">5. Production checks</a>
           </nav>
@@ -292,6 +293,32 @@ curl -fsSL https://raw.githubusercontent.com/YoussefSelk/VibeCode-PlayBook/main/
                   </tr>
                 </tbody>
               </table>
+            </div>
+          </section>
+
+          <section class="panel section" id="handoff">
+            <p class="eyebrow">Step 3b</p>
+            <h2>Use a strict handoff contract between agents</h2>
+            <div class="grid-2">
+              <article class="card">
+                <h3>Required handoff fields</h3>
+                <ul>
+                  <li>goal</li>
+                  <li>scope (files/symbols/flows)</li>
+                  <li>changes</li>
+                  <li>evidence (commands/tests/results)</li>
+                  <li>risks (assumptions/open questions/blockers)</li>
+                  <li>next-owner</li>
+                  <li>done-criteria</li>
+                </ul>
+              </article>
+              <article class="card">
+                <h3>Context-efficient research</h3>
+                <p>
+                  Use <code>.agents/reference-links.md</code> and include only
+                  the domain section needed for the current pass.
+                </p>
+              </article>
             </div>
           </section>
 

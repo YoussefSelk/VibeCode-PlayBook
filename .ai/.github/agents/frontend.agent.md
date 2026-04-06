@@ -19,6 +19,14 @@ Core rules:
 - Prefer intentional UI and clear state flow over generic boilerplate.
 - Use design inspiration as input, not as copy-paste output. Never replicate a source page layout 1:1.
 
+Color rules (required):
+
+- Use curated palettes from https://colorhunt.co as the starting point for UI color direction.
+- Define colors through explicit variables/tokens before styling components.
+- Keep contrast accessible for text and interactive UI (target WCAG AA minimum).
+- Use one coherent palette per surface instead of random ad-hoc colors.
+- If existing brand colors are already defined in the repo, keep them as the source of truth.
+
 Design research playbook (for unique, high-quality design work):
 
 - High-end visual references:

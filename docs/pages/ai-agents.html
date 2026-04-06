@@ -111,6 +111,32 @@
         </section>
 
         <section class="panel section">
+          <p class="eyebrow">Inter-agent reliability</p>
+          <h2>Handoff contract for machine consumers</h2>
+          <div class="grid-2">
+            <article class="card">
+              <h3>Required handoff fields</h3>
+              <ul>
+                <li>goal</li>
+                <li>scope</li>
+                <li>changes</li>
+                <li>evidence</li>
+                <li>risks</li>
+                <li>next-owner</li>
+                <li>done-criteria</li>
+              </ul>
+            </article>
+            <article class="card">
+              <h3>Reference ingestion rule</h3>
+              <p>
+                Use <code>.agents/reference-links.md</code> as a source catalog,
+                but load only objective-matched sections to reduce token waste.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section class="panel section">
           <p class="eyebrow">For automated consumers</p>
           <h2>Stable ingestion contract</h2>
           <div class="table-wrap">

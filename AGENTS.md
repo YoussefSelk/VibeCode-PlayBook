@@ -91,6 +91,25 @@ For any meaningful task:
 2. Execute only that pass
 3. Verify before moving forward
 
+## Inter-Agent Handoff Contract
+
+To make agents collaborate reliably, each handoff must include:
+
+- `goal`: what the next agent must achieve
+- `scope`: exact files/symbols/flows in scope
+- `changes`: what was changed (or investigated) so far
+- `evidence`: commands/tests/results that support the current state
+- `risks`: known risks, assumptions, and open questions
+- `next-owner`: exact next agent role and why
+- `done-criteria`: objective checks required before final sign-off
+
+Handoff quality rules:
+
+- Never hand off with vague text like "check this".
+- Always include reproducible validation steps.
+- If blocked, explicitly state blocker and smallest unblock path.
+- If contracts changed, handoff must call out impacted layers.
+
 ## Definition of Done
 
 A task is only done when:

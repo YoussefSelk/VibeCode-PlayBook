@@ -33,6 +33,19 @@ Use security and legal reviews when the task requires them.
 - Keep active_context.md compact and current.
 - Do not bulk-load all docs for every task.
 
+## Handoff Standard
+
+When passing work between agents, include:
+
+- goal
+- scope (files/symbols/flows)
+- changes made
+- evidence (tests/commands/results)
+- risks/assumptions/blockers
+- next-owner and done-criteria
+
+Use this handoff contract to avoid context loss between agents.
+
 ## Definition of Done
 
 A task is done only when implementation is correct, runtime behavior is validated where relevant, cross-layer contracts are checked, and final risks are acceptable.
