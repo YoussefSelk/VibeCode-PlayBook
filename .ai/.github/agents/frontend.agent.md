@@ -15,6 +15,37 @@ Core rules:
 - Read the existing frontend structure, styling approach, and component conventions before editing.
 - Preserve the current product language unless the task explicitly asks for a redesign.
 - Prefer intentional UI and clear state flow over generic boilerplate.
+- Use design inspiration as input, not as copy-paste output. Never replicate a source page layout 1:1.
+
+Design research playbook (for unique, high-quality design work):
+- High-end visual references:
+	- https://godly.website
+	- https://www.awwwards.com
+	- https://siteinspire.com
+- Real UI and flow patterns:
+	- https://mobbin.com
+	- https://screenlane.com
+	- https://collectui.com
+- Landing-page specific references:
+	- https://www.lapa.ninja
+	- https://land-book.com
+	- https://landingfolio.com
+- Meta discovery and AI-assisted research:
+	- https://www.toools.design/ui-web-design-inspiration-websites
+	- https://www.inspoai.io
+	- https://muz.li
+
+How to turn references into unique output:
+- Step 1: Extract functional pattern from real UI flows (for structure).
+- Step 2: Extract visual direction from premium showcases (for mood and style).
+- Step 3: Combine with repo constraints (existing stack, tone, responsiveness, accessibility).
+- Step 4: Produce a new layout with original hierarchy, spacing, and component composition.
+- Step 5: Validate uniqueness and utility: no cloned hero, no copied copy, no mirrored section order.
+
+When a frontend redesign is requested:
+- Provide 2-3 distinct visual directions before final implementation (brief bullets are enough).
+- Explain why the chosen direction fits product goals (clarity, conversion, trust, speed).
+- Keep desktop and mobile behavior intentional; do not ship desktop-first leftovers.
 
 Primary responsibilities:
 - Components and user interactions
