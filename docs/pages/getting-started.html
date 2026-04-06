@@ -110,9 +110,9 @@ curl -fsSL https://raw.githubusercontent.com/YoussefSelk/VibeCode-PlayBook/main/
               </article>
             </div>
             <p class="meta">
-              The installer always adds common files plus one assistant pack.
-              If interactive, it prompts you to choose the assistant.
-              In non-interactive environments, it falls back to
+              The installer always adds common files plus one assistant pack. If
+              interactive, it prompts you to choose the assistant. In
+              non-interactive environments, it falls back to
               <code>codex</code>. You can always force selection with
               <code>-Assistant claude|github|codex</code> (Bash:
               <code>--assistant claude|github|codex</code>).
@@ -155,13 +155,19 @@ curl -fsSL https://raw.githubusercontent.com/YoussefSelk/VibeCode-PlayBook/main/
                     <td>Backup before overwrite</td>
                     <td><code>-Backup</code></td>
                     <td><code>--backup</code></td>
-                    <td>Creates timestamped <code>.bak</code> files before overwrite (with Force).</td>
+                    <td>
+                      Creates timestamped <code>.bak</code> files before
+                      overwrite (with Force).
+                    </td>
                   </tr>
                   <tr>
                     <td>Custom source base</td>
                     <td><code>-RepoBase</code></td>
                     <td><code>--repo-base</code></td>
-                    <td>Downloads from a custom raw source URL (testing/mirror use).</td>
+                    <td>
+                      Downloads from a custom raw source URL (testing/mirror
+                      use).
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -177,9 +183,18 @@ curl -fsSL https://raw.githubusercontent.com/YoussefSelk/VibeCode-PlayBook/main/
                 <ul>
                   <li>Menu mode: run the default command and choose 1/2/3.</li>
                   <li>Force Claude: <code>-Assistant claude</code></li>
-                  <li>Install to folder: <code>-Destination 'C:\\path\\to\\project'</code></li>
+                  <li>
+                    Install to folder:
+                    <code>-Destination 'C:\\path\\to\\project'</code>
+                  </li>
                   <li>Overwrite safely: <code>-Force -Backup</code></li>
-                  <li>Custom source: <code>-RepoBase https://raw.githubusercontent.com/&lt;owner&gt;/&lt;repo&gt;/main</code></li>
+                  <li>
+                    Custom source:
+                    <code
+                      >-RepoBase
+                      https://raw.githubusercontent.com/&lt;owner&gt;/&lt;repo&gt;/main</code
+                    >
+                  </li>
                 </ul>
               </article>
               <article class="card">
@@ -187,9 +202,18 @@ curl -fsSL https://raw.githubusercontent.com/YoussefSelk/VibeCode-PlayBook/main/
                 <ul>
                   <li>Menu mode: run the default command and choose 1/2/3.</li>
                   <li>Force GitHub: <code>--assistant github</code></li>
-                  <li>Install to folder: <code>--destination /path/to/project</code></li>
+                  <li>
+                    Install to folder:
+                    <code>--destination /path/to/project</code>
+                  </li>
                   <li>Overwrite safely: <code>--force --backup</code></li>
-                  <li>Custom source: <code>--repo-base https://raw.githubusercontent.com/&lt;owner&gt;/&lt;repo&gt;/main</code></li>
+                  <li>
+                    Custom source:
+                    <code
+                      >--repo-base
+                      https://raw.githubusercontent.com/&lt;owner&gt;/&lt;repo&gt;/main</code
+                    >
+                  </li>
                 </ul>
               </article>
             </div>
