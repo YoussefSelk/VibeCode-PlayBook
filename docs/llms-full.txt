@@ -33,6 +33,9 @@ Security-sensitive chain:
 Legal/compliance-sensitive chain:
 - prompt-engineer -> owner -> tester -> legal -> reviewer
 
+Deployment/infra-sensitive chain:
+- prompt-engineer -> owner -> tester -> devops -> reviewer
+
 Very sensitive chain:
 - prompt-engineer -> owner -> tester -> security -> legal -> reviewer
 
@@ -40,6 +43,7 @@ Ownership rules:
 - db owns schema or persistence changes
 - backend owns API or business-logic changes
 - frontend owns UI or client-state changes
+- devops owns CI/CD, deployment, environment, and infrastructure delivery changes
 - tester validates the runtime flow
 - reviewer is the final checkpoint before calling the task done
 

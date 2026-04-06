@@ -160,6 +160,7 @@ Use the right specialist:
 - `db` for schema, migrations, persistence, data contracts
 - `backend` for APIs, validation, business logic, auth
 - `frontend` for UI, forms, client behavior, accessibility
+- `devops` for CI/CD, deployment safety, environment, and infrastructure delivery
 
 ### 5. Verify the real behavior
 
@@ -168,6 +169,7 @@ After implementation:
 - use `tester` for runtime and integration validation
 - use `security` for attack-surface or sensitive-data work
 - use `legal` for privacy, consent, policy, or claim-sensitive work
+- use `devops` for pipeline, deploy, and runtime operability validation
 - use `reviewer` for the final regression/risk pass
 
 ## Step-by-Step Usage Guide
@@ -296,6 +298,12 @@ Use these rules:
   - state behavior
   - request/response handling
   - accessibility
+
+- `devops`
+  - CI pipeline changes
+  - deployment automation and gates
+  - environment/configuration parity
+  - infrastructure delivery and operability checks
 
 ### Step 7. Run the right validation layer
 

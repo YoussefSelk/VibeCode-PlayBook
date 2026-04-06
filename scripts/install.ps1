@@ -58,6 +58,7 @@ $assistantPacks = @{
     @{ Source = ".ai/.codex/agents/tester.toml"; Target = ".codex/agents/tester.toml" },
     @{ Source = ".ai/.codex/agents/security.toml"; Target = ".codex/agents/security.toml" },
     @{ Source = ".ai/.codex/agents/legal.toml"; Target = ".codex/agents/legal.toml" },
+    @{ Source = ".ai/.codex/agents/devops.toml"; Target = ".codex/agents/devops.toml" },
     @{ Source = ".ai/.codex/agents/reviewer.toml"; Target = ".codex/agents/reviewer.toml" }
   )
   "claude" = @(
@@ -74,6 +75,7 @@ $assistantPacks = @{
     @{ Source = ".ai/.claude/agents/tester.md"; Target = ".claude/agents/tester.md" },
     @{ Source = ".ai/.claude/agents/security.md"; Target = ".claude/agents/security.md" },
     @{ Source = ".ai/.claude/agents/legal.md"; Target = ".claude/agents/legal.md" },
+    @{ Source = ".ai/.claude/agents/devops.md"; Target = ".claude/agents/devops.md" },
     @{ Source = ".ai/.claude/agents/reviewer.md"; Target = ".claude/agents/reviewer.md" }
   )
   "github" = @(
@@ -86,6 +88,7 @@ $assistantPacks = @{
     @{ Source = ".ai/.github/agents/tester.agent.md"; Target = ".github/agents/tester.agent.md" },
     @{ Source = ".ai/.github/agents/security.agent.md"; Target = ".github/agents/security.agent.md" },
     @{ Source = ".ai/.github/agents/legal.agent.md"; Target = ".github/agents/legal.agent.md" },
+    @{ Source = ".ai/.github/agents/devops.agent.md"; Target = ".github/agents/devops.agent.md" },
     @{ Source = ".ai/.github/agents/reviewer.agent.md"; Target = ".github/agents/reviewer.agent.md" }
   )
 }

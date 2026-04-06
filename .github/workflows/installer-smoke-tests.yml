@@ -60,6 +60,7 @@ jobs:
             $d = '.tmp-ci-codex'; if (Test-Path $d) { Remove-Item -Recurse -Force $d }
             ./scripts/install.ps1 -Destination $d -RepoBase $base *> $null
             Assert-True (Test-Path "$d/.codex/config.toml") 'Missing codex config'
+            Assert-True (Test-Path "$d/.codex/agents/devops.toml") 'Missing codex devops agent'
             Remove-Item -Recurse -Force $d
           }
 
@@ -68,6 +69,7 @@ jobs:
             ./scripts/install.ps1 -Destination $d -RepoBase $base -Assistant claude *> $null
             Assert-True (Test-Path "$d/CLAUDE.md") 'Missing CLAUDE.md'
             Assert-True (Test-Path "$d/.claude/commands/plan.md") 'Missing Claude command'
+            Assert-True (Test-Path "$d/.claude/agents/devops.md") 'Missing claude devops agent'
             Remove-Item -Recurse -Force $d
           }
 
@@ -75,6 +77,7 @@ jobs:
             $d = '.tmp-ci-github'; if (Test-Path $d) { Remove-Item -Recurse -Force $d }
             ./scripts/install.ps1 -Destination $d -RepoBase $base -Assistant github *> $null
             Assert-True (Test-Path "$d/.github/copilot-instructions.md") 'Missing copilot instructions'
+            Assert-True (Test-Path "$d/.github/agents/devops.agent.md") 'Missing github devops agent'
             Remove-Item -Recurse -Force $d
           }
 
@@ -129,13 +132,16 @@ jobs:
 
           bash ./scripts/install.sh --destination .tmp-bash-codex --repo-base "$BASE"
           test -f .tmp-bash-codex/.codex/config.toml
+          test -f .tmp-bash-codex/.codex/agents/devops.toml
 
           bash ./scripts/install.sh --destination .tmp-bash-claude --repo-base "$BASE" --assistant claude
           test -f .tmp-bash-claude/CLAUDE.md
           test -f .tmp-bash-claude/.claude/commands/security-check.md
+          test -f .tmp-bash-claude/.claude/agents/devops.md
 
           bash ./scripts/install.sh --destination .tmp-bash-github --repo-base "$BASE" --assistant github
           test -f .tmp-bash-github/.github/copilot-instructions.md
+          test -f .tmp-bash-github/.github/agents/devops.agent.md
 
           set +e
           bash ./scripts/install.sh --destination .tmp-bash-invalid --repo-base "$BASE" --assistant badone >/tmp/invalid.out 2>&1

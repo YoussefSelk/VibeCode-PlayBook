@@ -8,7 +8,7 @@
 - a lightweight multi-agent workflow layer that can be installed into another repo to improve coordination, context handling, and validation
 - primary users:
 - developers using Codex, GitHub Copilot, Claude, or similar coding assistants
-- teams wanting clearer ownership across db, backend, frontend, testing, security, and review
+- teams wanting clearer ownership across db, backend, frontend, devops, testing, security, and review
 - LLM agents that need a compact operating model for a repo
 
 ## Core Flows

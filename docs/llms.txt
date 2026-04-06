@@ -48,10 +48,17 @@ Escalate to legal when the change involves:
 - AI disclosures
 - policy-sensitive copy or risky claims
 
+Escalate to devops when the change involves:
+- CI/CD pipelines
+- deployment strategy or safety
+- environment/config parity
+- infrastructure provisioning or runtime operability
+
 Ownership:
 - db: schema, migrations, queries, persistence contracts
 - backend: APIs, validation, business logic, auth, backend contracts
 - frontend: UI, accessibility, client behavior, frontend integration
+- devops: CI/CD, deployment safety, environment, infrastructure delivery
 - tester: runtime flow validation across layers
 - security: trust boundaries and data exposure review
 - legal: privacy and compliance risk review

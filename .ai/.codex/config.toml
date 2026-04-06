@@ -15,6 +15,9 @@ nickname_candidates = ["API Lead", "Service Owner"]
 [agents.frontend]
 nickname_candidates = ["UI Lead", "Client Owner"]
 
+[agents.devops]
+nickname_candidates = ["DevOps Lead", "Release Guard"]
+
 [agents.tester]
 nickname_candidates = ["QA Lead", "Flow Verifier"]
 

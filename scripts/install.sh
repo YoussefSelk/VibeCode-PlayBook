@@ -64,6 +64,7 @@ CODEX_PACK=(
   ".ai/.codex/agents/tester.toml:.codex/agents/tester.toml"
   ".ai/.codex/agents/security.toml:.codex/agents/security.toml"
   ".ai/.codex/agents/legal.toml:.codex/agents/legal.toml"
+  ".ai/.codex/agents/devops.toml:.codex/agents/devops.toml"
   ".ai/.codex/agents/reviewer.toml:.codex/agents/reviewer.toml"
 )
 
@@ -81,6 +82,7 @@ CLAUDE_PACK=(
   ".ai/.claude/agents/tester.md:.claude/agents/tester.md"
   ".ai/.claude/agents/security.md:.claude/agents/security.md"
   ".ai/.claude/agents/legal.md:.claude/agents/legal.md"
+  ".ai/.claude/agents/devops.md:.claude/agents/devops.md"
   ".ai/.claude/agents/reviewer.md:.claude/agents/reviewer.md"
 )
 
@@ -94,6 +96,7 @@ GITHUB_PACK=(
   ".ai/.github/agents/tester.agent.md:.github/agents/tester.agent.md"
   ".ai/.github/agents/security.agent.md:.github/agents/security.agent.md"
   ".ai/.github/agents/legal.agent.md:.github/agents/legal.agent.md"
+  ".ai/.github/agents/devops.agent.md:.github/agents/devops.agent.md"
   ".ai/.github/agents/reviewer.agent.md:.github/agents/reviewer.agent.md"
 )
 

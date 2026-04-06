@@ -26,6 +26,9 @@ Do not bulk-load every doc.
 - `frontend`
   Owns UI, client behavior, accessibility, and frontend-side API integration.
 
+- `devops`
+  Owns CI/CD pipelines, deployment safety, infrastructure configuration, and runtime operability checks.
+
 - `tester`
   Verifies the real runtime flow across layers.
 
@@ -52,11 +55,16 @@ For legal/compliance-sensitive work:
 
 `prompt-engineer` -> owning agent(s) -> `tester` -> `legal` -> `reviewer`
 
+For deployment or infra-sensitive work:
+
+`prompt-engineer` -> owning agent(s) -> `tester` -> `devops` -> `reviewer`
+
 ## Ownership Rules
 
 - `db` for schema or persistence changes
 - `backend` for API or business-logic changes
 - `frontend` for UI or client-state changes
+- `devops` for CI/CD, deployment, environment, and infrastructure delivery changes
 - `tester` after implementation
 - `security` for auth, secrets, access control, uploads, risky integrations, or sensitive data flows
 - `legal` for privacy, consent, analytics, retention, AI disclosures, policy-sensitive copy, or regulated/sensitive flows

@@ -19,6 +19,7 @@ Use security and legal reviews when the task requires them.
 - db: schema, migrations, data layer
 - backend: APIs, validation, business logic, auth
 - frontend: UI, client behavior, accessibility
+- devops: CI/CD, deployment safety, environment, and infrastructure delivery
 - tester: runtime validation
 - security: auth, secrets, permissions, sensitive data
 - legal: privacy, consent, retention, policy-sensitive flows
