@@ -74,6 +74,14 @@ CLAUDE_PACK=(
   ".ai/.claude/commands/test.md:.claude/commands/test.md"
   ".ai/.claude/commands/security-check.md:.claude/commands/security-check.md"
   ".ai/.claude/commands/legal-check.md:.claude/commands/legal-check.md"
+  ".ai/.claude/agents/prompt-engineer.md:.claude/agents/prompt-engineer.md"
+  ".ai/.claude/agents/db.md:.claude/agents/db.md"
+  ".ai/.claude/agents/backend.md:.claude/agents/backend.md"
+  ".ai/.claude/agents/frontend.md:.claude/agents/frontend.md"
+  ".ai/.claude/agents/tester.md:.claude/agents/tester.md"
+  ".ai/.claude/agents/security.md:.claude/agents/security.md"
+  ".ai/.claude/agents/legal.md:.claude/agents/legal.md"
+  ".ai/.claude/agents/reviewer.md:.claude/agents/reviewer.md"
 )
 
 GITHUB_PACK=(

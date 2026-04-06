@@ -66,7 +66,15 @@ $assistantPacks = @{
     @{ Source = ".ai/.claude/commands/review.md"; Target = ".claude/commands/review.md" },
     @{ Source = ".ai/.claude/commands/test.md"; Target = ".claude/commands/test.md" },
     @{ Source = ".ai/.claude/commands/security-check.md"; Target = ".claude/commands/security-check.md" },
-    @{ Source = ".ai/.claude/commands/legal-check.md"; Target = ".claude/commands/legal-check.md" }
+    @{ Source = ".ai/.claude/commands/legal-check.md"; Target = ".claude/commands/legal-check.md" },
+    @{ Source = ".ai/.claude/agents/prompt-engineer.md"; Target = ".claude/agents/prompt-engineer.md" },
+    @{ Source = ".ai/.claude/agents/db.md"; Target = ".claude/agents/db.md" },
+    @{ Source = ".ai/.claude/agents/backend.md"; Target = ".claude/agents/backend.md" },
+    @{ Source = ".ai/.claude/agents/frontend.md"; Target = ".claude/agents/frontend.md" },
+    @{ Source = ".ai/.claude/agents/tester.md"; Target = ".claude/agents/tester.md" },
+    @{ Source = ".ai/.claude/agents/security.md"; Target = ".claude/agents/security.md" },
+    @{ Source = ".ai/.claude/agents/legal.md"; Target = ".claude/agents/legal.md" },
+    @{ Source = ".ai/.claude/agents/reviewer.md"; Target = ".claude/agents/reviewer.md" }
   )
   "github" = @(
     @{ Source = ".ai/.github/copilot-instructions.md"; Target = ".github/copilot-instructions.md" },
