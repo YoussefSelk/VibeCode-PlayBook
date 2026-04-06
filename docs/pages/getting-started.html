@@ -68,6 +68,8 @@
           <p class="eyebrow">Onboarding Path</p>
           <nav>
             <a href="#install">1. Install</a>
+            <a href="#install-options">1b. Installer options</a>
+            <a href="#install-examples">1c. Command examples</a>
             <a href="#context">2. Context files</a>
             <a href="#flow">3. Role flow</a>
             <a href="#validation">4. Validation</a>
@@ -78,7 +80,7 @@
         <div class="content">
           <section class="panel section" id="install">
             <p class="eyebrow">Step 1</p>
-            <h2>Install with one command (defaults to codex)</h2>
+            <h2>Install with one command (menu in interactive terminals)</h2>
             <div class="grid-2">
               <article class="card">
                 <h3>PowerShell</h3>
@@ -109,11 +111,88 @@ curl -fsSL https://raw.githubusercontent.com/YoussefSelk/VibeCode-PlayBook/main/
             </div>
             <p class="meta">
               The installer always adds common files plus one assistant pack.
-              Optional override: add <code>-Assistant claude</code> or
-              <code>-Assistant github</code> (Bash:
-              <code>--assistant claude|github</code>) when you do not want the
-              default <code>codex</code> pack.
+              If interactive, it prompts you to choose the assistant.
+              In non-interactive environments, it falls back to
+              <code>codex</code>. You can always force selection with
+              <code>-Assistant claude|github|codex</code> (Bash:
+              <code>--assistant claude|github|codex</code>).
             </p>
+          </section>
+
+          <section class="panel section" id="install-options">
+            <p class="eyebrow">Step 1b</p>
+            <h2>Installer options explained</h2>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Option</th>
+                    <th>PowerShell</th>
+                    <th>Bash</th>
+                    <th>What it does</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Destination</td>
+                    <td><code>-Destination</code></td>
+                    <td><code>--destination</code></td>
+                    <td>Install files into a specific project directory.</td>
+                  </tr>
+                  <tr>
+                    <td>Assistant pack</td>
+                    <td><code>-Assistant codex|claude|github</code></td>
+                    <td><code>--assistant codex|claude|github</code></td>
+                    <td>Forces one assistant pack and skips menu selection.</td>
+                  </tr>
+                  <tr>
+                    <td>Overwrite</td>
+                    <td><code>-Force</code></td>
+                    <td><code>--force</code></td>
+                    <td>Overwrites files that already exist in target path.</td>
+                  </tr>
+                  <tr>
+                    <td>Backup before overwrite</td>
+                    <td><code>-Backup</code></td>
+                    <td><code>--backup</code></td>
+                    <td>Creates timestamped <code>.bak</code> files before overwrite (with Force).</td>
+                  </tr>
+                  <tr>
+                    <td>Custom source base</td>
+                    <td><code>-RepoBase</code></td>
+                    <td><code>--repo-base</code></td>
+                    <td>Downloads from a custom raw source URL (testing/mirror use).</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="panel section" id="install-examples">
+            <p class="eyebrow">Step 1c</p>
+            <h2>Every common command pattern</h2>
+            <div class="grid-2">
+              <article class="card">
+                <h3>PowerShell examples</h3>
+                <ul>
+                  <li>Menu mode: run the default command and choose 1/2/3.</li>
+                  <li>Force Claude: <code>-Assistant claude</code></li>
+                  <li>Install to folder: <code>-Destination 'C:\\path\\to\\project'</code></li>
+                  <li>Overwrite safely: <code>-Force -Backup</code></li>
+                  <li>Custom source: <code>-RepoBase https://raw.githubusercontent.com/&lt;owner&gt;/&lt;repo&gt;/main</code></li>
+                </ul>
+              </article>
+              <article class="card">
+                <h3>Bash examples</h3>
+                <ul>
+                  <li>Menu mode: run the default command and choose 1/2/3.</li>
+                  <li>Force GitHub: <code>--assistant github</code></li>
+                  <li>Install to folder: <code>--destination /path/to/project</code></li>
+                  <li>Overwrite safely: <code>--force --backup</code></li>
+                  <li>Custom source: <code>--repo-base https://raw.githubusercontent.com/&lt;owner&gt;/&lt;repo&gt;/main</code></li>
+                </ul>
+              </article>
+            </div>
           </section>
 
           <section class="panel section" id="context">

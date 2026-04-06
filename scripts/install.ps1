@@ -98,7 +98,26 @@ function Select-Assistant {
     return $CurrentChoice.ToLowerInvariant()
   }
 
-  return "codex"
+  if ([Console]::IsInputRedirected -or [Console]::IsOutputRedirected) {
+    return "codex"
+  }
+
+  Write-Host "Select assistant pack:" -ForegroundColor White
+  Write-Host "  1) codex" -ForegroundColor White
+  Write-Host "  2) claude" -ForegroundColor White
+  Write-Host "  3) github" -ForegroundColor White
+
+  while ($true) {
+    $choice = (Read-Host "Enter choice [1-3] (default: 1)").Trim()
+    switch ($choice) {
+      "" { return "codex" }
+      "1" { return "codex" }
+      "2" { return "claude" }
+      "3" { return "github" }
+      default { Write-WarnLine "Invalid choice. Please enter 1, 2, or 3." }
+    }
+  }
+
 }
 
 $assistantKey = Select-Assistant -CurrentChoice $Assistant

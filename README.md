@@ -83,7 +83,8 @@ Bash into a specific folder:
 curl -fsSL https://raw.githubusercontent.com/YoussefSelk/VibeCode-PlayBook/main/scripts/install.sh | bash -s -- --destination /path/to/your/project
 ```
 
-By default, one command installs only the `codex` assistant pack with no menu:
+By default, the installer shows an assistant menu in interactive terminals.
+In non-interactive environments (for example CI), it falls back to `codex`:
 
 - `codex`
 - `claude`

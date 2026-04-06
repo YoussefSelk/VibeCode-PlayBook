@@ -139,10 +139,29 @@ download_file() {
 
 select_assistant() {
   local current="${1:-}"
+  local choice=""
 
   if [[ -n "$current" ]]; then
     printf '%s' "${current,,}"
     return
+  fi
+
+  if [[ -r /dev/tty && -w /dev/tty ]]; then
+    printf '%b\n' "Select assistant pack:" > /dev/tty
+    printf '%b\n' "  1) codex" > /dev/tty
+    printf '%b\n' "  2) claude" > /dev/tty
+    printf '%b\n' "  3) github" > /dev/tty
+
+    while true; do
+      printf '%b' "Enter choice [1-3] (default: 1): " > /dev/tty
+      IFS= read -r choice < /dev/tty || true
+      case "$choice" in
+        ""|1) printf 'codex'; return ;;
+        2) printf 'claude'; return ;;
+        3) printf 'github'; return ;;
+        *) printf '%b\n' "Invalid choice. Please enter 1, 2, or 3." > /dev/tty ;;
+      esac
+    done
   fi
 
   printf 'codex'
