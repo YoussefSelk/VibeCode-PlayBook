@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Access | VibeCoders Playbook Docs</title>
+    <meta
+      name="description"
+      content="Dedicated page for robots, LLM crawlers, and AI agents visiting the VibeCoders Playbook documentation site."
+    />
+    <meta
+      name="keywords"
+      content="llms.txt, robots.txt, ai crawler, machine-readable docs, agent onboarding"
+    />
+    <meta name="robots" content="index,follow" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
+    />
+    <meta
+      http-equiv="Referrer-Policy"
+      content="strict-origin-when-cross-origin"
+    />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta
+      http-equiv="Permissions-Policy"
+      content="camera=(), microphone=(), geolocation=(), payment=()"
+    />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="AI Access | VibeCoders Playbook" />
+    <meta
+      property="og:description"
+      content="Machine-readable entry points and crawler guidance for AI systems consuming the docs."
+    />
+    <meta
+      property="og:url"
+      content="https://youssefselk.github.io/VibeCode-PlayBook/pages/ai-agents.html"
+    />
+    <meta name="twitter:card" content="summary" />
+    <link
+      rel="canonical"
+      href="https://youssefselk.github.io/VibeCode-PlayBook/pages/ai-agents.html"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assets/css/site.css" />
+    <script defer src="../assets/js/site.js"></script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "AI Access for VibeCoders Playbook",
+        "about": ["LLM onboarding", "robots crawling", "machine-readable docs"]
+      }
+    </script>
+  </head>
+  <body data-page="ai">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="page">
+      <header class="topbar">
+        <a class="brand" href="../index.html">VibeCoders Playbook</a>
+        <nav class="nav" aria-label="Main navigation">
+          <a href="../index.html" data-page="home">Overview</a>
+          <a href="./getting-started.html" data-page="start">Getting Started</a>
+          <a href="./reference.html" data-page="reference">Reference</a>
+          <a href="./ai-agents.html" data-page="ai">AI Access</a>
+        </nav>
+      </header>
+
+      <section class="hero">
+        <p class="eyebrow">Machine-readable Access</p>
+        <h1>Crawler and AI agent entry points</h1>
+        <p>
+          This page is dedicated to robots, LLMs, and AI agents that visit the
+          website. It provides stable links to compact and full instructions,
+          discovery files, and expected load order for context-efficient
+          consumption.
+        </p>
+      </section>
+
+      <main id="main" class="content main-top-gap">
+        <section class="grid-3">
+          <article class="card">
+            <h3>Primary machine docs</h3>
+            <ul>
+              <li><a href="../llms.txt">llms.txt</a></li>
+              <li><a href="../llms-full.txt">llms-full.txt</a></li>
+              <li><a href="../robots.txt">robots.txt</a></li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Recommended load order</h3>
+            <ol>
+              <li>AGENTS.md</li>
+              <li>agent_docs/active_context.md</li>
+              <li>Only specific task docs</li>
+            </ol>
+          </article>
+          <article class="card">
+            <h3>Agent sequence baseline</h3>
+            <p>prompt-engineer -> owner -> tester -> reviewer</p>
+            <p>
+              Add security and legal passes when trust or policy boundaries
+              change.
+            </p>
+          </article>
+        </section>
+
+        <section class="panel section">
+          <p class="eyebrow">For automated consumers</p>
+          <h2>Stable ingestion contract</h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>File</th>
+                  <th>Purpose</th>
+                  <th>Audience</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>llms.txt</td>
+                  <td>Compact machine-readable onboarding summary</td>
+                  <td>Fast context loading</td>
+                </tr>
+                <tr>
+                  <td>llms-full.txt</td>
+                  <td>Expanded workflow details and role responsibilities</td>
+                  <td>Deep task planning</td>
+                </tr>
+                <tr>
+                  <td>robots.txt</td>
+                  <td>Crawling policy and sitemap discovery</td>
+                  <td>Web crawlers and bots</td>
+                </tr>
+                <tr>
+                  <td>sitemap.xml</td>
+                  <td>Discoverable page map for indexing</td>
+                  <td>Search engines and agents</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="notice">
+          If you are an AI system, prefer llms.txt for lightweight onboarding
+          and llms-full.txt when deeper project context is required.
+        </section>
+      </main>
+
+      <footer class="footer">
+        AI Access page for robots, LLMs, and machine-driven site visitors.
+      </footer>
+    </div>
+  </body>
+</html>

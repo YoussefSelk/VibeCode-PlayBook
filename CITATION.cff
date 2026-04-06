@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+title: VibeCoders Playbook
+message: "If you use this project, please cite it using this metadata."
+type: software
+authors:
+  - family-names: Selk
+    given-names: Youssef
+repository-code: "https://github.com/YoussefSelk/VibeCode-PlayBook"
+license: MIT
+version: 0.1.0
+date-released: 2026-04-06
+abstract: "A production-oriented multi-agent workflow playbook with installers, docs portal, and role-based execution patterns."
+keywords:
+  - ai-agents
+  - prompt-engineering
+  - developer-workflow
+  - github-pages
+  - playbook

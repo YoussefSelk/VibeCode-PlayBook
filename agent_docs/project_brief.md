@@ -3,7 +3,7 @@
 ## Product
 
 - name:
-- VibeCoders-PlayBook
+- VibeCoders Playbook
 - one-line description:
 - a lightweight multi-agent workflow layer that can be installed into another repo to improve coordination, context handling, and validation
 - primary users:

@@ -1,4 +1,4 @@
-# VibeCoders-PlayBook Full Guide For LLMs
+# VibeCoders Playbook Full Guide For LLMs
 
 This repository provides a lightweight multi-agent operating layer that can be installed into another project.
 

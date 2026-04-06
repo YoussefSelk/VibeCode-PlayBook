@@ -1,4 +1,4 @@
-# VibeCoders-PlayBook
+# VibeCoders Playbook
 
 Purpose: lightweight multi-agent repo workflow for humans and LLMs.
 

@@ -1,4 +1,4 @@
-# VibeCoders-PlayBook Agent Workflow
+# VibeCoders Playbook Agent Workflow
 
 This repo is designed to improve agent coordination without wasting context.
 

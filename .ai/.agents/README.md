@@ -1,11 +1,7 @@
-# Shared Agent Layer
+# Shared Agent Resources
 
-This pack contains assistant-neutral agent workflow files that can be installed in any repository.
+This folder contains assistant-agnostic role docs used by installer common files.
 
-Installed target files:
-- `.agents/README.md`
-- `.agents/roles.md`
+## Files
 
-Purpose:
-- give humans and assistants a small shared role map outside any single provider format
-- keep assistant-specific files separate from the shared workflow layer
+- roles.md: compact role summary shared across assistant packs

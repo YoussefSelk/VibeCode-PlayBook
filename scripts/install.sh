@@ -7,6 +7,41 @@ FORCE="${FORCE:-0}"
 BACKUP="${BACKUP:-0}"
 ASSISTANT="${ASSISTANT:-}"
 REPO_BASE="${REPO_BASE:-https://raw.githubusercontent.com/YoussefSelk/VibeCode-PlayBook/main}"
+REPO_BASE="${REPO_BASE%/}"
+
+if [[ -t 1 && -z "${NO_COLOR:-}" ]]; then
+  C_RESET='\033[0m'
+  C_INFO='\033[36m'
+  C_WARN='\033[33m'
+  C_OK='\033[32m'
+  C_ACCENT='\033[35m'
+else
+  C_RESET=''
+  C_INFO=''
+  C_WARN=''
+  C_OK=''
+  C_ACCENT=''
+fi
+
+print_banner() {
+  printf '%b\n' ""
+  printf '%b\n' "${C_INFO}========================================${C_RESET}"
+  printf '%b\n' "${C_ACCENT}VibeCoders Playbook Installer${C_RESET}"
+  printf '%b\n' "${C_INFO}========================================${C_RESET}"
+  printf '%b\n' ""
+}
+
+print_info() {
+  printf '%b\n' "${C_INFO}$1${C_RESET}"
+}
+
+print_warn() {
+  printf '%b\n' "${C_WARN}$1${C_RESET}"
+}
+
+print_ok() {
+  printf '%b\n' "${C_OK}$1${C_RESET}"
+}
 
 COMMON_FILES=(
   "AGENTS.md"
@@ -34,13 +69,23 @@ CODEX_PACK=(
 
 CLAUDE_PACK=(
   ".ai/.claude/CLAUDE.md:CLAUDE.md"
+  ".ai/.claude/commands/plan.md:.claude/commands/plan.md"
+  ".ai/.claude/commands/review.md:.claude/commands/review.md"
+  ".ai/.claude/commands/test.md:.claude/commands/test.md"
+  ".ai/.claude/commands/security-check.md:.claude/commands/security-check.md"
+  ".ai/.claude/commands/legal-check.md:.claude/commands/legal-check.md"
 )
 
 GITHUB_PACK=(
   ".ai/.github/copilot-instructions.md:.github/copilot-instructions.md"
   ".ai/.github/instructions/agent-workflow.instructions.md:.github/instructions/agent-workflow.instructions.md"
+  ".ai/.github/agents/db.agent.md:.github/agents/db.agent.md"
+  ".ai/.github/agents/backend.agent.md:.github/agents/backend.agent.md"
+  ".ai/.github/agents/frontend.agent.md:.github/agents/frontend.agent.md"
   ".ai/.github/agents/prompt-engineer.agent.md:.github/agents/prompt-engineer.agent.md"
   ".ai/.github/agents/tester.agent.md:.github/agents/tester.agent.md"
+  ".ai/.github/agents/security.agent.md:.github/agents/security.agent.md"
+  ".ai/.github/agents/legal.agent.md:.github/agents/legal.agent.md"
   ".ai/.github/agents/reviewer.agent.md:.github/agents/reviewer.agent.md"
 )
 
@@ -64,6 +109,7 @@ while [[ $# -gt 0 ]]; do
       ;;
     --repo-base)
       REPO_BASE="${2:?Missing repo base URL}"
+      REPO_BASE="${REPO_BASE%/}"
       shift 2
       ;;
     *)
@@ -99,27 +145,7 @@ select_assistant() {
     return
   fi
 
-  if [[ ! -r /dev/tty ]]; then
-    echo "No interactive terminal found. Re-run with --assistant codex|claude|github." >&2
-    exit 1
-  fi
-
-  echo >&2
-  echo "Choose the assistant pack to install:" >&2
-  echo "1. Codex" >&2
-  echo "2. Claude" >&2
-  echo "3. GitHub Copilot" >&2
-
-  while true; do
-    printf 'Enter 1, 2, or 3: ' > /dev/tty
-    read -r selection < /dev/tty
-    case "$selection" in
-      1) printf 'codex'; return ;;
-      2) printf 'claude'; return ;;
-      3) printf 'github'; return ;;
-      *) echo "Please enter 1, 2, or 3." >&2 ;;
-    esac
-  done
+  printf 'codex'
 }
 
 assistant_key="$(select_assistant "$ASSISTANT")"
@@ -137,8 +163,9 @@ esac
 mkdir -p "$DESTINATION"
 cd "$DESTINATION"
 
-echo "Installing VibeCoders-PlayBook into $(pwd)"
-echo "Assistant pack: $assistant_key"
+print_banner
+print_info "Installing VibeCoders Playbook into $(pwd)"
+print_info "Assistant pack: $assistant_key"
 
 downloaded=0
 skipped=0
@@ -156,7 +183,7 @@ for relative_path in "${COMMON_FILES[@]}"; do
   mkdir -p "$target_dir"
 
   if [[ -f "$target_path" && "$FORCE" != "1" ]]; then
-    echo "Skipping existing file: $target_path"
+    print_warn "Skipping existing file: $target_path"
     skipped=$((skipped + 1))
     continue
   fi
@@ -164,11 +191,11 @@ for relative_path in "${COMMON_FILES[@]}"; do
   if [[ -f "$target_path" && "$FORCE" == "1" && "$BACKUP" == "1" ]]; then
     backup_path="${target_path}.bak.$(date +%Y%m%d-%H%M%S)"
     cp "$target_path" "$backup_path"
-    echo "Backed up existing file: $target_path -> $backup_path"
+    print_info "Backed up existing file: $target_path -> $backup_path"
     backed_up=$((backed_up + 1))
   fi
 
-  echo "Fetching $target_path"
+  print_info "Fetching $target_path"
   temp_path="${target_path}.tmp"
   download_file "$REPO_BASE/$source_path" "$temp_path"
   mv "$temp_path" "$target_path"
@@ -182,7 +209,7 @@ for pack_entry in "${ASSISTANT_PACK[@]}"; do
   mkdir -p "$target_dir"
 
   if [[ -f "$target_path" && "$FORCE" != "1" ]]; then
-    echo "Skipping existing file: $target_path"
+    print_warn "Skipping existing file: $target_path"
     skipped=$((skipped + 1))
     continue
   fi
@@ -190,11 +217,11 @@ for pack_entry in "${ASSISTANT_PACK[@]}"; do
   if [[ -f "$target_path" && "$FORCE" == "1" && "$BACKUP" == "1" ]]; then
     backup_path="${target_path}.bak.$(date +%Y%m%d-%H%M%S)"
     cp "$target_path" "$backup_path"
-    echo "Backed up existing file: $target_path -> $backup_path"
+    print_info "Backed up existing file: $target_path -> $backup_path"
     backed_up=$((backed_up + 1))
   fi
 
-  echo "Fetching $target_path"
+  print_info "Fetching $target_path"
   temp_path="${target_path}.tmp"
   download_file "$REPO_BASE/$source_path" "$temp_path"
   mv "$temp_path" "$target_path"
@@ -202,12 +229,12 @@ for pack_entry in "${ASSISTANT_PACK[@]}"; do
 done
 
 echo
-echo "Install complete."
-echo "Assistant pack: $assistant_key"
-echo "Downloaded: $downloaded"
-echo "Skipped: $skipped"
+print_ok "Install complete."
+print_info "Assistant pack: $assistant_key"
+print_info "Downloaded: $downloaded"
+print_info "Skipped: $skipped"
 if [[ "$BACKUP" == "1" ]]; then
-  echo "Backed up: $backed_up"
+  print_info "Backed up: $backed_up"
 fi
 echo "Next steps:"
 echo "1. Review AGENTS.md"

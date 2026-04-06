@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Getting Started | VibeCoders Playbook Docs</title>
+    <meta
+      name="description"
+      content="Professional getting-started guide for VibeCoders Playbook installation, onboarding, and daily execution model."
+    />
+    <meta
+      name="keywords"
+      content="VibeCoders Playbook install, onboarding, multi-agent setup, developer workflow docs"
+    />
+    <meta name="robots" content="index,follow" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
+    />
+    <meta
+      http-equiv="Referrer-Policy"
+      content="strict-origin-when-cross-origin"
+    />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta
+      http-equiv="Permissions-Policy"
+      content="camera=(), microphone=(), geolocation=(), payment=()"
+    />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Getting Started | VibeCoders Playbook" />
+    <meta
+      property="og:description"
+      content="Install and operate VibeCoders Playbook with production-oriented workflow steps."
+    />
+    <meta
+      property="og:url"
+      content="https://youssefselk.github.io/VibeCode-PlayBook/pages/getting-started.html"
+    />
+    <meta name="twitter:card" content="summary" />
+    <link
+      rel="canonical"
+      href="https://youssefselk.github.io/VibeCode-PlayBook/pages/getting-started.html"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assets/css/site.css" />
+    <script defer src="../assets/js/site.js"></script>
+  </head>
+  <body data-page="start">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="page">
+      <header class="topbar">
+        <a class="brand" href="../index.html">VibeCoders Playbook</a>
+        <nav class="nav" aria-label="Main navigation">
+          <a href="../index.html" data-page="home">Overview</a>
+          <a href="./getting-started.html" data-page="start">Getting Started</a>
+          <a href="./reference.html" data-page="reference">Reference</a>
+          <a href="./ai-agents.html" data-page="ai">AI Access</a>
+        </nav>
+      </header>
+
+      <main id="main" class="layout">
+        <aside class="sidebar">
+          <p class="eyebrow">Onboarding Path</p>
+          <nav>
+            <a href="#install">1. Install</a>
+            <a href="#context">2. Context files</a>
+            <a href="#flow">3. Role flow</a>
+            <a href="#validation">4. Validation</a>
+            <a href="#production">5. Production checks</a>
+          </nav>
+        </aside>
+
+        <div class="content">
+          <section class="panel section" id="install">
+            <p class="eyebrow">Step 1</p>
+            <h2>Install with one command (defaults to codex)</h2>
+            <div class="grid-2">
+              <article class="card">
+                <h3>PowerShell</h3>
+                <pre class="output-block" id="ps-install">
+iex "&amp; { $(irm https://raw.githubusercontent.com/YoussefSelk/VibeCode-PlayBook/main/scripts/install.ps1) }"</pre
+                >
+                <button
+                  class="btn btn-secondary"
+                  type="button"
+                  data-copy-target="ps-install"
+                >
+                  Copy command
+                </button>
+              </article>
+              <article class="card">
+                <h3>Bash</h3>
+                <pre class="output-block" id="bash-install">
+curl -fsSL https://raw.githubusercontent.com/YoussefSelk/VibeCode-PlayBook/main/scripts/install.sh | bash</pre
+                >
+                <button
+                  class="btn btn-secondary"
+                  type="button"
+                  data-copy-target="bash-install"
+                >
+                  Copy command
+                </button>
+              </article>
+            </div>
+            <p class="meta">
+              The installer always adds common files plus one assistant pack.
+              Optional override: add <code>-Assistant claude</code> or
+              <code>-Assistant github</code> (Bash:
+              <code>--assistant claude|github</code>) when you do not want the
+              default <code>codex</code> pack.
+            </p>
+          </section>
+
+          <section class="panel section" id="context">
+            <p class="eyebrow">Step 2</p>
+            <h2>Fill the minimum context set</h2>
+            <div class="grid-2">
+              <article class="card">
+                <h3>Required files</h3>
+                <ul>
+                  <li>agent_docs/project_brief.md</li>
+                  <li>agent_docs/tech_stack.md</li>
+                  <li>agent_docs/active_context.md</li>
+                  <li>agent_docs/verification.md</li>
+                </ul>
+              </article>
+              <article class="card">
+                <h3>Load order for every task</h3>
+                <ol>
+                  <li>AGENTS.md</li>
+                  <li>agent_docs/active_context.md</li>
+                  <li>Only the specific docs needed</li>
+                </ol>
+              </article>
+            </div>
+          </section>
+
+          <section class="panel section" id="flow">
+            <p class="eyebrow">Step 3</p>
+            <h2>Use role routing before implementation</h2>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Role</th>
+                    <th>Ownership</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>prompt-engineer</td>
+                    <td>Turns rough ask into actionable execution plan</td>
+                  </tr>
+                  <tr>
+                    <td>db</td>
+                    <td>Schema, migrations, persistence contracts</td>
+                  </tr>
+                  <tr>
+                    <td>backend</td>
+                    <td>APIs, business logic, auth, validation</td>
+                  </tr>
+                  <tr>
+                    <td>frontend</td>
+                    <td>UI behavior, accessibility, client integration</td>
+                  </tr>
+                  <tr>
+                    <td>tester</td>
+                    <td>Runtime flow and integration verification</td>
+                  </tr>
+                  <tr>
+                    <td>reviewer</td>
+                    <td>Final risk and regression gate</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="panel section" id="validation">
+            <p class="eyebrow">Step 4</p>
+            <h2>Run validation before closure</h2>
+            <div class="grid-3">
+              <article class="card">
+                <h3>Runtime</h3>
+                <p>Test the real user flow, not only unit behavior.</p>
+              </article>
+              <article class="card">
+                <h3>Contracts</h3>
+                <p>Confirm request/response and data schema consistency.</p>
+              </article>
+              <article class="card">
+                <h3>Risk</h3>
+                <p>Add security and legal checks when boundaries change.</p>
+              </article>
+            </div>
+          </section>
+
+          <section class="notice" id="production">
+            Production-ready means implementation quality + runtime proof +
+            reviewer-level acceptable risk.
+          </section>
+
+          <section class="panel section">
+            <p class="eyebrow">Step 5</p>
+            <h2>Enable GitHub production controls</h2>
+            <div class="grid-2">
+              <article class="card">
+                <h3>Repository baseline</h3>
+                <ul>
+                  <li>CODE_OF_CONDUCT.md</li>
+                  <li>SECURITY.md</li>
+                  <li>SUPPORT.md</li>
+                  <li>.github/CODEOWNERS</li>
+                  <li>.github/dependabot.yml</li>
+                </ul>
+              </article>
+              <article class="card">
+                <h3>GitHub settings checklist</h3>
+                <ul>
+                  <li>Protect main with required pull request reviews</li>
+                  <li>Enable required status checks for CI workflows</li>
+                  <li>Enable Dependency graph and Dependabot alerts</li>
+                  <li>
+                    Enable Secret scanning and push protection when available
+                  </li>
+                  <li>Set Pages source to GitHub Actions</li>
+                </ul>
+              </article>
+            </div>
+          </section>
+        </div>
+      </main>
+
+      <footer class="footer">VibeCoders Playbook documentation portal.</footer>
+    </div>
+  </body>
+</html>

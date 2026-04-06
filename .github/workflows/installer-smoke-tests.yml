@@ -1,0 +1,162 @@
+name: Installer Smoke Tests
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "scripts/install.ps1"
+      - "scripts/install.sh"
+      - ".ai/**"
+      - "AGENTS.md"
+      - "agent_docs/**"
+      - ".github/workflows/installer-smoke-tests.yml"
+  pull_request:
+    paths:
+      - "scripts/install.ps1"
+      - "scripts/install.sh"
+      - ".ai/**"
+      - "AGENTS.md"
+      - "agent_docs/**"
+      - ".github/workflows/installer-smoke-tests.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  windows-powershell-installer:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Start local test server
+        shell: pwsh
+        run: |
+          $job = Start-Job -ScriptBlock {
+            Set-Location $env:GITHUB_WORKSPACE
+            python -m http.server 8890 --bind 127.0.0.1
+          }
+          "JOB_ID=$($job.Id)" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
+          Start-Sleep -Seconds 2
+
+      - name: Run PowerShell installer matrix
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $base = 'http://127.0.0.1:8890'
+
+          function Assert-True([bool]$condition, [string]$message) {
+            if (-not $condition) { throw $message }
+          }
+
+          function Test-Case([string]$name, [scriptblock]$test) {
+            Write-Host "Running: $name"
+            & $test
+            Write-Host "PASS: $name"
+          }
+
+          Test-Case 'default codex install' {
+            $d = '.tmp-ci-codex'; if (Test-Path $d) { Remove-Item -Recurse -Force $d }
+            ./scripts/install.ps1 -Destination $d -RepoBase $base *> $null
+            Assert-True (Test-Path "$d/.codex/config.toml") 'Missing codex config'
+            Remove-Item -Recurse -Force $d
+          }
+
+          Test-Case 'claude pack install' {
+            $d = '.tmp-ci-claude'; if (Test-Path $d) { Remove-Item -Recurse -Force $d }
+            ./scripts/install.ps1 -Destination $d -RepoBase $base -Assistant claude *> $null
+            Assert-True (Test-Path "$d/CLAUDE.md") 'Missing CLAUDE.md'
+            Assert-True (Test-Path "$d/.claude/commands/plan.md") 'Missing Claude command'
+            Remove-Item -Recurse -Force $d
+          }
+
+          Test-Case 'github pack install' {
+            $d = '.tmp-ci-github'; if (Test-Path $d) { Remove-Item -Recurse -Force $d }
+            ./scripts/install.ps1 -Destination $d -RepoBase $base -Assistant github *> $null
+            Assert-True (Test-Path "$d/.github/copilot-instructions.md") 'Missing copilot instructions'
+            Remove-Item -Recurse -Force $d
+          }
+
+          Test-Case 'invalid assistant fails' {
+            $failed = $false
+            try {
+              ./scripts/install.ps1 -Destination '.tmp-ci-invalid' -RepoBase $base -Assistant nope *> $null
+            } catch {
+              $failed = $true
+              Assert-True ($_.Exception.Message -match 'Unsupported assistant') 'Unexpected error for invalid assistant'
+            }
+            Assert-True $failed 'Invalid assistant should fail'
+          }
+
+          Test-Case 'force backup behavior' {
+            $d = '.tmp-ci-backup'; if (Test-Path $d) { Remove-Item -Recurse -Force $d }
+            New-Item -ItemType Directory -Path "$d/.codex" -Force | Out-Null
+            Set-Content -Path "$d/.codex/config.toml" -Value 'OLD'
+            ./scripts/install.ps1 -Destination $d -RepoBase $base -Assistant codex -Force -Backup *> $null
+            $bak = Get-ChildItem "$d/.codex" -Filter 'config.toml.bak.*' | Select-Object -First 1
+            Assert-True ([bool]$bak) 'Backup file not created'
+            Remove-Item -Recurse -Force $d
+          }
+
+      - name: Stop local test server
+        if: always()
+        shell: pwsh
+        run: |
+          if ($env:JOB_ID) {
+            Stop-Job -Id $env:JOB_ID -ErrorAction SilentlyContinue
+            Remove-Job -Id $env:JOB_ID -ErrorAction SilentlyContinue
+          }
+
+  ubuntu-bash-installer:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Start local test server
+        run: |
+          python3 -m http.server 8891 --bind 127.0.0.1 >/tmp/http.log 2>&1 &
+          echo "SERVER_PID=$!" >> "$GITHUB_ENV"
+          sleep 2
+
+      - name: Run Bash installer smoke tests
+        run: |
+          set -euo pipefail
+          BASE="http://127.0.0.1:8891"
+
+          rm -rf .tmp-bash-codex .tmp-bash-claude .tmp-bash-github .tmp-bash-backup .tmp-bash-skip
+
+          bash ./scripts/install.sh --destination .tmp-bash-codex --repo-base "$BASE"
+          test -f .tmp-bash-codex/.codex/config.toml
+
+          bash ./scripts/install.sh --destination .tmp-bash-claude --repo-base "$BASE" --assistant claude
+          test -f .tmp-bash-claude/CLAUDE.md
+          test -f .tmp-bash-claude/.claude/commands/security-check.md
+
+          bash ./scripts/install.sh --destination .tmp-bash-github --repo-base "$BASE" --assistant github
+          test -f .tmp-bash-github/.github/copilot-instructions.md
+
+          set +e
+          bash ./scripts/install.sh --destination .tmp-bash-invalid --repo-base "$BASE" --assistant badone >/tmp/invalid.out 2>&1
+          status=$?
+          set -e
+          test $status -ne 0
+          grep -q "Unsupported assistant" /tmp/invalid.out
+
+          mkdir -p .tmp-bash-skip/.codex
+          printf 'SENTINEL' > .tmp-bash-skip/.codex/config.toml
+          bash ./scripts/install.sh --destination .tmp-bash-skip --repo-base "$BASE" --assistant codex
+          grep -q 'SENTINEL' .tmp-bash-skip/.codex/config.toml
+
+          mkdir -p .tmp-bash-backup/.codex
+          printf 'OLD' > .tmp-bash-backup/.codex/config.toml
+          bash ./scripts/install.sh --destination .tmp-bash-backup --repo-base "$BASE" --assistant codex --force --backup
+          ls .tmp-bash-backup/.codex/config.toml.bak.* >/dev/null
+
+      - name: Stop local test server
+        if: always()
+        run: |
+          if [ -n "${SERVER_PID:-}" ]; then
+            kill "$SERVER_PID" || true
+          fi

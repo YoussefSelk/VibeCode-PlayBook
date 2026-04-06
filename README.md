@@ -1,5 +1,4 @@
-
-# VibeCoders-PlayBook
+# VibeCoders Playbook
 
 This repo is a lean multi-agent playbook you can drop into a real project.
 
@@ -18,6 +17,7 @@ If you use GitHub Pages with GitHub Actions, pushes to `main` that change `docs/
 Set the repository Pages source to `GitHub Actions` in GitHub settings if Pages is not already enabled.
 
 Purpose:
+
 - better agent coordination
 - less repeated context
 - fewer wasted tokens
@@ -38,6 +38,22 @@ Purpose:
 - `agent_docs/`
   Progressive-disclosure context files.
   Only load what the current task needs.
+
+## Open Source Baseline
+
+This repository includes standard open source governance and maintenance files:
+
+- `LICENSE`
+- `CODE_OF_CONDUCT.md`
+- `CONTRIBUTING.md`
+- `SECURITY.md`
+- `SUPPORT.md`
+- `CHANGELOG.md`
+- `CITATION.cff`
+- `.github/CODEOWNERS`
+- `.github/ISSUE_TEMPLATE/*`
+- `.github/PULL_REQUEST_TEMPLATE.md`
+- `.github/dependabot.yml`
 
 ## Quick Start
 
@@ -67,24 +83,27 @@ Bash into a specific folder:
 curl -fsSL https://raw.githubusercontent.com/YoussefSelk/VibeCode-PlayBook/main/scripts/install.sh | bash -s -- --destination /path/to/your/project
 ```
 
-The installer will prompt you to choose the assistant pack:
+By default, one command installs only the `codex` assistant pack with no menu:
+
 - `codex`
 - `claude`
 - `github` for GitHub Copilot
 
-You can also skip the menu explicitly:
+Use an explicit assistant only if you want a different pack:
 
 PowerShell:
 
 ```powershell
-iex "& { $(irm https://raw.githubusercontent.com/YoussefSelk/VibeCode-PlayBook/main/scripts/install.ps1) } -Assistant codex"
+iex "& { $(irm https://raw.githubusercontent.com/YoussefSelk/VibeCode-PlayBook/main/scripts/install.ps1) } -Assistant claude"
 ```
 
 Bash:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/YoussefSelk/VibeCode-PlayBook/main/scripts/install.sh | bash -s -- --assistant codex
+curl -fsSL https://raw.githubusercontent.com/YoussefSelk/VibeCode-PlayBook/main/scripts/install.sh | bash -s -- --assistant claude
 ```
+
+If you also need GitHub Copilot files, run with `github` instead.
 
 ### 2. Fill the minimum context
 
@@ -108,6 +127,20 @@ To publish it:
 - choose `GitHub Actions` as the Pages source
 - push a change to `main` that touches `docs/` or the workflow file
 
+Production defaults included in this repo:
+
+- least-privilege GitHub Actions permissions for Pages deploy
+- `robots.txt` + `sitemap.xml` configured for crawler discovery
+- strict browser security meta policies (CSP, Referrer Policy, Permissions Policy)
+- responsive static pages with no build step required
+
+Installer UX defaults included in this repo:
+
+- colored status output in both PowerShell and Bash installers
+- branded installer banner
+- deterministic one-command install with `codex` as default assistant pack
+- explicit assistant override for `claude` and `github`
+
 ### 3. Start with `prompt-engineer`
 
 Do not start with a vague implementation prompt.
@@ -130,6 +163,7 @@ Use the right specialist:
 ### 5. Verify the real behavior
 
 After implementation:
+
 - use `tester` for runtime and integration validation
 - use `security` for attack-surface or sensitive-data work
 - use `legal` for privacy, consent, policy, or claim-sensitive work
@@ -142,6 +176,7 @@ After implementation:
 Use one of the install commands above.
 
 By default:
+
 - existing files are skipped
 - only the core workflow files are added
 
@@ -176,6 +211,7 @@ curl -fsSL https://raw.githubusercontent.com/YoussefSelk/VibeCode-PlayBook/main/
 ### Step 2. Add the durable project context
 
 Fill `agent_docs/project_brief.md` with:
+
 - what the product is
 - who it is for
 - core flows
@@ -183,12 +219,14 @@ Fill `agent_docs/project_brief.md` with:
 - quality bar
 
 Fill `agent_docs/tech_stack.md` with:
+
 - actual framework and libraries
 - real commands
 - env/setup notes
 - architecture boundaries
 
 Fill `agent_docs/verification.md` with:
+
 - test commands
 - manual validation steps
 - high-risk areas
@@ -198,6 +236,7 @@ Fill `agent_docs/verification.md` with:
 This is the most important day-to-day file.
 
 Use `agent_docs/active_context.md` for:
+
 - current goal
 - active scope
 - current task
@@ -227,6 +266,7 @@ Have prompt-engineer rewrite this into a clear multi-agent task:
 ```
 
 What `prompt-engineer` is for:
+
 - remove ambiguity
 - assign the right owners
 - add missing validation steps
@@ -259,6 +299,7 @@ Use these rules:
 ### Step 7. Run the right validation layer
 
 Use `tester` when:
+
 - the task crosses layers
 - the bug survives tests
 - you need real runtime proof
@@ -271,6 +312,7 @@ Do not stop at unit tests. Reproduce the behavior and identify any contract mism
 ```
 
 Use `security` when:
+
 - login/auth/session code changed
 - permissions or roles changed
 - uploads are involved
@@ -285,6 +327,7 @@ unsafe input handling, and sensitive data leakage.
 ```
 
 Use `legal` when:
+
 - privacy or consent changed
 - analytics/cookies/tracking changed
 - retention or deletion behavior changed
@@ -330,6 +373,7 @@ Very sensitive feature:
 ### Step 10. Update context after each meaningful pass
 
 After finishing work, update:
+
 - `agent_docs/active_context.md`
 - `agent_docs/decisions.md` if a durable decision was made
 - `agent_docs/verification.md` if new checks became important
@@ -371,6 +415,7 @@ Use short, durable docs and load only the files needed for the current pass.
 ## Install Notes
 
 The installer adds the common core files plus only the selected assistant pack:
+
 - `AGENTS.md`
 - `.agents/*`
 - `.codex/*` for Codex installs
@@ -379,8 +424,9 @@ The installer adds the common core files plus only the selected assistant pack:
 - `agent_docs/*`
 
 Behavior:
+
 - existing files are skipped by default
-- assistant pack is chosen through a menu unless `-Assistant` or `--assistant` is provided
+- assistant pack defaults to `codex` unless `-Assistant` or `--assistant` is provided
 - `-Force` or `--force` overwrites existing files
 - `-Backup` or `--backup` creates timestamped backups before overwrite
 - PowerShell uses `Invoke-WebRequest`

@@ -1,0 +1,122 @@
+name: Repo Production Readiness
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-required-files:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate required file set
+        run: |
+          set -euo pipefail
+          required=(
+            "LICENSE"
+            "README.md"
+            "CONTRIBUTING.md"
+            "CODE_OF_CONDUCT.md"
+            "SECURITY.md"
+            "SUPPORT.md"
+            "CHANGELOG.md"
+            "CITATION.cff"
+            ".github/CODEOWNERS"
+            ".github/dependabot.yml"
+            ".github/PULL_REQUEST_TEMPLATE.md"
+            ".github/ISSUE_TEMPLATE/config.yml"
+            ".github/ISSUE_TEMPLATE/bug_report.yml"
+            ".github/ISSUE_TEMPLATE/feature_request.yml"
+            ".github/workflows/deploy-pages.yml"
+            ".github/workflows/installer-smoke-tests.yml"
+            "scripts/install.ps1"
+            "scripts/install.sh"
+            "docs/index.html"
+            "docs/pages/getting-started.html"
+            "docs/pages/reference.html"
+            "docs/pages/ai-agents.html"
+            "docs/assets/css/site.css"
+            "docs/assets/js/site.js"
+            "docs/robots.txt"
+            "docs/sitemap.xml"
+          )
+
+          for f in "${required[@]}"; do
+            if [ ! -f "$f" ]; then
+              echo "Missing required file: $f"
+              exit 1
+            fi
+            if [ ! -s "$f" ]; then
+              echo "Empty required file: $f"
+              exit 1
+            fi
+          done
+
+      - name: Validate installer source references
+        run: |
+          set -euo pipefail
+
+          python3 - <<'PY'
+          import re
+          from pathlib import Path
+
+          ps1 = Path('scripts/install.ps1').read_text(encoding='utf-8')
+          sh = Path('scripts/install.sh').read_text(encoding='utf-8')
+
+          ps1_refs = re.findall(r'Source\s*=\s*"([^"]+)"', ps1)
+          sh_refs = re.findall(r'"(\.ai/[^"]+):', sh)
+
+          missing = []
+          for ref in ps1_refs + sh_refs:
+            p = Path(ref)
+            if not p.exists():
+              missing.append(ref)
+
+          if missing:
+            raise SystemExit('Missing installer source refs:\n' + '\n'.join(sorted(set(missing))))
+
+          print(f'Validated installer refs: ps1={len(ps1_refs)} sh={len(sh_refs)}')
+          PY
+
+  validate-doc-links:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate docs relative links and assets
+        run: |
+          set -euo pipefail
+
+          python3 - <<'PY'
+          import re
+          from pathlib import Path
+
+          html_files = list(Path('docs').rglob('*.html'))
+          errors = []
+          pattern = re.compile(r'(?:href|src)="([^"]+)"')
+
+          for file in html_files:
+            content = file.read_text(encoding='utf-8')
+            for ref in pattern.findall(content):
+              if ref.startswith(('http://', 'https://', 'mailto:', '#')):
+                continue
+              clean = ref.split('?', 1)[0].split('#', 1)[0]
+              if not clean:
+                continue
+              target = (file.parent / clean).resolve()
+              if not target.exists():
+                errors.append(f'{file}: {ref}')
+
+          if errors:
+            raise SystemExit('Broken docs refs:\n' + '\n'.join(errors))
+
+          print(f'Validated docs links across {len(html_files)} html files.')
+          PY

@@ -5,6 +5,7 @@ This repository is designed for fast, collaborative "vibe coding" with Codex and
 ## How We Work
 
 We optimize for:
+
 - fast iteration
 - clear ownership
 - small focused changes
@@ -34,6 +35,13 @@ We optimize for:
 - Favor runtime validation for cross-stack changes.
 - Pull in `security` when a change affects attack surface or sensitive data.
 - Pull in `legal` when a change affects privacy, consent, disclosures, policy-sensitive copy, or regulated flows.
+
+Related project policies:
+
+- `CODE_OF_CONDUCT.md`
+- `SECURITY.md`
+- `SUPPORT.md`
+- `.github/CODEOWNERS`
 
 ## Before Opening a PR
 

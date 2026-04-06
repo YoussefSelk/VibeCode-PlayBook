@@ -1,2 +1,7 @@
 User-agent: *
 Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+Allow: /pages/ai-agents.html
+
+Sitemap: https://youssefselk.github.io/VibeCode-PlayBook/sitemap.xml

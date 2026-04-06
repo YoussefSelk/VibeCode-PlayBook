@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reference | VibeCoders Playbook Docs</title>
+    <meta
+      name="description"
+      content="Professional reference page for agent ownership model, risk routing, and docs map."
+    />
+    <meta
+      name="keywords"
+      content="agent roles reference, workflow matrix, security legal escalation, multi-agent playbook"
+    />
+    <meta name="robots" content="index,follow" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
+    />
+    <meta
+      http-equiv="Referrer-Policy"
+      content="strict-origin-when-cross-origin"
+    />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta
+      http-equiv="Permissions-Policy"
+      content="camera=(), microphone=(), geolocation=(), payment=()"
+    />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Reference | VibeCoders Playbook" />
+    <meta
+      property="og:description"
+      content="Role routing matrix and release quality criteria for the VibeCoders Playbook workflow."
+    />
+    <meta
+      property="og:url"
+      content="https://youssefselk.github.io/VibeCode-PlayBook/pages/reference.html"
+    />
+    <meta name="twitter:card" content="summary" />
+    <link
+      rel="canonical"
+      href="https://youssefselk.github.io/VibeCode-PlayBook/pages/reference.html"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assets/css/site.css" />
+    <script defer src="../assets/js/site.js"></script>
+  </head>
+  <body data-page="reference">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="page">
+      <header class="topbar">
+        <a class="brand" href="../index.html">VibeCoders Playbook</a>
+        <nav class="nav" aria-label="Main navigation">
+          <a href="../index.html" data-page="home">Overview</a>
+          <a href="./getting-started.html" data-page="start">Getting Started</a>
+          <a href="./reference.html" data-page="reference">Reference</a>
+          <a href="./ai-agents.html" data-page="ai">AI Access</a>
+        </nav>
+      </header>
+
+      <main id="main" class="content main-top-gap">
+        <section class="panel section">
+          <p class="eyebrow">Reference</p>
+          <h2>Role routing matrix</h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Change type</th>
+                  <th>Primary owner</th>
+                  <th>Required follow-up</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Schema change, migration, query performance</td>
+                  <td>db</td>
+                  <td>tester -> reviewer</td>
+                </tr>
+                <tr>
+                  <td>API or auth update</td>
+                  <td>backend</td>
+                  <td>tester -> security -> reviewer</td>
+                </tr>
+                <tr>
+                  <td>UI behavior and accessibility</td>
+                  <td>frontend</td>
+                  <td>tester -> reviewer</td>
+                </tr>
+                <tr>
+                  <td>Privacy, retention, disclosure changes</td>
+                  <td>owning layer</td>
+                  <td>tester -> legal -> reviewer</td>
+                </tr>
+                <tr>
+                  <td>Cross-layer feature</td>
+                  <td>backend + frontend</td>
+                  <td>tester -> security/legal when needed -> reviewer</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="grid-3">
+          <article class="card">
+            <h3>Machine-readable files</h3>
+            <ul>
+              <li><a href="../llms.txt">llms.txt</a></li>
+              <li><a href="../llms-full.txt">llms-full.txt</a></li>
+              <li><a href="../robots.txt">robots.txt</a></li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Core docs map</h3>
+            <ul>
+              <li>AGENTS.md</li>
+              <li>agent_docs/active_context.md</li>
+              <li>agent_docs/project_brief.md</li>
+              <li>agent_docs/tech_stack.md</li>
+              <li>agent_docs/verification.md</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Release quality bar</h3>
+            <ul>
+              <li>Behavior verified in runtime conditions</li>
+              <li>No contract mismatch at boundaries</li>
+              <li>Risk reviews completed if applicable</li>
+              <li>Reviewer confirms residual risk acceptable</li>
+            </ul>
+          </article>
+        </section>
+
+        <section class="grid-2">
+          <article class="card">
+            <h3>Governance and safety files</h3>
+            <ul>
+              <li>CODE_OF_CONDUCT.md</li>
+              <li>SECURITY.md</li>
+              <li>SUPPORT.md</li>
+              <li>CHANGELOG.md</li>
+              <li>.github/CODEOWNERS</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>CI and deployment workflows</h3>
+            <ul>
+              <li>.github/workflows/deploy-pages.yml</li>
+              <li>.github/workflows/installer-smoke-tests.yml</li>
+              <li>.github/workflows/repo-production-readiness.yml</li>
+            </ul>
+          </article>
+        </section>
+
+        <section class="notice">
+          Use this page as your shared operating reference during planning and
+          PR review.
+        </section>
+      </main>
+
+      <footer class="footer">VibeCoders Playbook reference center.</footer>
+    </div>
+  </body>
+</html>
